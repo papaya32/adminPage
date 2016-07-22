@@ -1,28 +1,13 @@
-<?PHP
-/*
+<?PHP /*
     Registration/Login script from HTML Form Guide
     V1.0
-
     This program is free software published under the
     terms of the GNU Lesser General Public License.
     http://www.gnu.org/copyleft/lesser.html
     
-
-This program is distributed in the hope that it will
-be useful - WITHOUT ANY WARRANTY; without even the
-implied warranty of MERCHANTABILITY or FITNESS FOR A
-PARTICULAR PURPOSE.
-
-For updates, please visit:
-http://www.html-form-guide.com/php-form/php-registration-form.html
-http://www.html-form-guide.com/php-form/php-login-form.html
-
-*/
-require_once("class.phpmailer.php");
-require_once("formvalidator.php");
-
-class FGMembersite
-{
+This program is distributed in the hope that it will be useful - WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A 
+PARTICULAR PURPOSE. For updates, please visit: http://www.html-form-guide.com/php-form/php-registration-form.html 
+http://www.html-form-guide.com/php-form/php-login-form.html */ require_once("class.phpmailer.php"); require_once("formvalidator.php"); class FGMembersite {
     var $admin_email;
     var $from_address;
     
@@ -38,16 +23,16 @@ class FGMembersite
     //-----Initialization -------
     function FGMembersite()
     {
-        $this->sitename = 'YourWebsiteName.com';
+        $this->sitename = 'oreillyj.com';
         $this->rand_key = '0iQx5oBk66oVZep';
     }
     
     function InitDB($host,$uname,$pwd,$database,$tablename)
     {
-        $this->db_host  = $host;
+        $this->db_host = $host;
         $this->username = $uname;
-        $this->pwd  = $pwd;
-        $this->database  = $database;
+        $this->pwd = $pwd;
+        $this->database = $database;
         $this->tablename = $tablename;
         
     }
@@ -92,12 +77,10 @@ class FGMembersite
         {
             return false;
         }
-
         $this->SendAdminIntimationEmail($formvars);
         
         return true;
     }
-
     function ConfirmUser()
     {
         if(empty($_GET['code'])||strlen($_GET['code'])<=10)
@@ -148,7 +131,7 @@ class FGMembersite
             return true;
 	}
 	$_SESSION['num_login'] = $_SESSION['num_login'] + 1;
-	$num_login = mysql_query("UPDATE $this->tablename SET num_login=$_SESSION['num_login'] WHERE username = '$username'", $this->connection) or die(mysql_error());
+	//$num_login = mysql_query("UPDATE $this->tablename SET num_login=$_SESSION['num_login'] WHERE username = '$username'", $this->connection) or die(mysql_error());
 	//TODO DEBUG THIS
         return true;
     }
@@ -156,7 +139,6 @@ class FGMembersite
     function CheckLogin()
     {
          if(!isset($_SESSION)){ session_start(); }
-
          $sessionvar = $this->GetLoginSessionVar();
          
          if(empty($_SESSION[$sessionvar]))
@@ -253,6 +235,11 @@ class FGMembersite
             $this->HandleError("Error sending new password");
             return false;
         }
+        $old_path = getcwd();
+        chdir('/home/papaya/scripts/');
+        $bashScript = "sudo ./mosquitto.sh " . $user_rec['username'] . " " . $new_password . " 2";
+        $output = shell_exec($bashScript);
+        chdir($old_path);
         return true;
     }
     
@@ -282,7 +269,6 @@ class FGMembersite
         }
         
         $pwd = trim($_POST['oldpwd']);
-
     	$salt = $user_rec['salt'];
         $hash = $this->checkhashSSHA($salt, $pwd);
         
@@ -297,6 +283,11 @@ class FGMembersite
         {
             return false;
         }
+        $old_path = getcwd();
+        chdir('/home/papaya/scripts/');
+        $bashScript = "sudo ./mosquitto.sh " . $user_rec['username'] . " " . $_POST['newpwd'] . " 2";
+        $output = shell_exec($bashScript);
+        chdir($old_path);
         return true;
     }
     
@@ -353,9 +344,7 @@ class FGMembersite
         {
             return $this->from_address;
         }
-
         $host = $_SERVER['SERVER_NAME'];
-
         $from ="nobody@$host";
         return $from;
     } 
@@ -375,9 +364,8 @@ class FGMembersite
             return false;
         }          
         $username = $this->SanitizeForSQL($username);
-
   	$nresult = mysql_query("SELECT * FROM $this->tablename WHERE username = '$username'", $this->connection) or die(mysql_error());
-        // check for result 
+        // check for result
         $no_of_rows = mysql_num_rows($nresult);
         if ($no_of_rows > 0) {
             $nresult = mysql_fetch_array($nresult);
@@ -387,8 +375,6 @@ class FGMembersite
          
            
         }
-
-
         $qry = "Select name, email, username, num_login from $this->tablename where username='$username' and password='$hash' and confirmcode='y'";
         
         $result = mysql_query($qry,$this->connection);
@@ -402,14 +388,13 @@ class FGMembersite
         $row = mysql_fetch_assoc($result);
         
         
-        $_SESSION['name_of_user']  = $row['name'];
+        $_SESSION['name_of_user'] = $row['name'];
         $_SESSION['email_of_user'] = $row['email'];
         $_SESSION['username_of_user'] = $row['username'];
 	$_SESSION['num_login'] = $row['num_login'];
         
         return true;
     }
-
  public function checkhashSSHA($salt, $password) {
  
         $hash = base64_encode(sha1($password . $salt, true) . $salt);
@@ -426,7 +411,7 @@ class FGMembersite
         }   
         $confirmcode = $this->SanitizeForSQL($_GET['code']);
         
-        $result = mysql_query("Select name, email from $this->tablename where confirmcode='$confirmcode'",$this->connection);   
+        $result = mysql_query("Select name, email from $this->tablename where confirmcode='$confirmcode'",$this->connection);
         if(!$result || mysql_num_rows($result) <= 0)
         {
             $this->HandleError("Wrong confirm code.");
@@ -436,7 +421,7 @@ class FGMembersite
         $user_rec['name'] = $row['name'];
         $user_rec['email']= $row['email'];
         
-        $qry = "Update $this->tablename Set confirmcode='y' Where  confirmcode='$confirmcode'";
+        $qry = "Update $this->tablename Set confirmcode='y' Where confirmcode='$confirmcode'";
         
         if(!mysql_query( $qry ,$this->connection))
         {
@@ -460,14 +445,11 @@ class FGMembersite
     function ChangePasswordInDB($user_rec, $newpwd)
     {
         $newpwd = $this->SanitizeForSQL($newpwd);
-
         $hash = $this->hashSSHA($newpwd);
-
 	$new_password = $hash["encrypted"];
-
 	$salt = $hash["salt"];
         
-        $qry = "Update $this->tablename Set password='".$new_password."', salt='".$salt."' Where  id_user=".$user_rec['id_user']."";
+        $qry = "Update $this->tablename Set password='".$new_password."', salt='".$salt."' Where id_user=".$user_rec['id_user']."";
         
         if(!mysql_query( $qry ,$this->connection))
         {
@@ -486,15 +468,13 @@ class FGMembersite
         }   
         $email = $this->SanitizeForSQL($email);
         
-        $result = mysql_query("Select * from $this->tablename where email='$email'",$this->connection);  
-
+        $result = mysql_query("Select * from $this->tablename where email='$email'",$this->connection);
         if(!$result || mysql_num_rows($result) <= 0)
         {
             $this->HandleError("There is no user with email: $email");
             return false;
         }
         $user_rec = mysql_fetch_assoc($result);
-
         
         return true;
     }
@@ -508,16 +488,14 @@ class FGMembersite
         $mailer->AddAddress($user_rec['email'],$user_rec['name']);
         
         $mailer->Subject = "Welcome to ".$this->sitename;
-
-        $mailer->From = $this->GetFromAddress();        
+        $mailer->From = $this->GetFromAddress();
         
         $mailer->Body ="Hello ".$user_rec['name']."\r\n\r\n".
-        "Welcome! Your registration  with ".$this->sitename." is completed.\r\n".
+        "Welcome! Your registration with ".$this->sitename." is completed.\r\n".
         "\r\n".
         "Regards,\r\n".
         "Webmaster\r\n".
         $this->sitename;
-
         if(!$mailer->Send())
         {
             $this->HandleError("Failed sending user welcome email.");
@@ -539,8 +517,7 @@ class FGMembersite
         $mailer->AddAddress($this->admin_email);
         
         $mailer->Subject = "Registration Completed: ".$user_rec['name'];
-
-        $mailer->From = $this->GetFromAddress();         
+        $mailer->From = $this->GetFromAddress();
         
         $mailer->Body ="A new user registered at ".$this->sitename."\r\n".
         "Name: ".$user_rec['name']."\r\n".
@@ -569,14 +546,12 @@ class FGMembersite
         $mailer->AddAddress($email,$user_rec['name']);
         
         $mailer->Subject = "Your reset password request at ".$this->sitename;
-
         $mailer->From = $this->GetFromAddress();
         
         $link = $this->GetAbsoluteURLFolder().
                 '/resetpwd.php?email='.
                 urlencode($email).'&code='.
                 urlencode($this->GetResetPasswordCode($email));
-
         $mailer->Body ="Hello ".$user_rec['name']."\r\n\r\n".
         "There was a request to reset your password at ".$this->sitename."\r\n".
         "Please click the link below to complete the request: \r\n".$link."\r\n".
@@ -602,7 +577,6 @@ class FGMembersite
         $mailer->AddAddress($email,$user_rec['name']);
         
         $mailer->Subject = "Your new password for ".$this->sitename;
-
         $mailer->From = $this->GetFromAddress();
         
         $mailer->Body ="Hello ".$user_rec['name']."\r\n\r\n".
@@ -640,7 +614,6 @@ class FGMembersite
         $validator->addValidation("email","req","Please fill in Email");
   
         $validator->addValidation("password","req","Please fill in Password");
-
         
         if(!$validator->ValidateForm())
         {
@@ -674,8 +647,7 @@ class FGMembersite
         $mailer->AddAddress($formvars['email'],$formvars['name']);
         
         $mailer->Subject = "Your registration with ".$this->sitename;
-
-        $mailer->From = $this->GetFromAddress();        
+        $mailer->From = $this->GetFromAddress();
         
         $confirmcode = $formvars['confirmcode'];
         
@@ -689,7 +661,6 @@ class FGMembersite
         "Regards,\r\n".
         "Webmaster\r\n".
         $this->sitename;
-
         if(!$mailer->Send())
         {
             $this->HandleError("Failed sending registration confirmation email.");
@@ -700,16 +671,13 @@ class FGMembersite
     function GetAbsoluteURLFolder()
     {
         $scriptFolder = (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on')) ? 'https://' : 'http://';
-
         $urldir ='';
         $pos = strrpos($_SERVER['REQUEST_URI'],'/');
         if(false !==$pos)
         {
             $urldir = substr($_SERVER['REQUEST_URI'],0,$pos);
         }
-
         $scriptFolder .= $_SERVER['HTTP_HOST'].$urldir;
-
         return $scriptFolder;
     }
     
@@ -726,8 +694,7 @@ class FGMembersite
         $mailer->AddAddress($this->admin_email);
         
         $mailer->Subject = "New registration: ".$formvars['name'];
-
-        $mailer->From = $this->GetFromAddress();         
+        $mailer->From = $this->GetFromAddress();
         
         $mailer->Body ="A new user registered at ".$this->sitename."\r\n".
         "Name: ".$formvars['name']."\r\n".
@@ -769,6 +736,11 @@ class FGMembersite
             $this->HandleError("Inserting to Database failed!");
             return false;
         }
+        $old_path = getcwd();
+        chdir('/home/papaya/scripts/');
+	$bashScript = "sudo ./mosquitto.sh " . $formvars['username'] . " " . $formvars['password'] . " 1";
+        $output = shell_exec($bashScript);
+        chdir($old_path);
         return true;
     }
     
@@ -776,7 +748,7 @@ class FGMembersite
     {
         $field_val = $this->SanitizeForSQL($formvars[$fieldname]);
         $qry = "select username from $this->tablename where $fieldname='".$field_val."'";
-        $result = mysql_query($qry,$this->connection);   
+        $result = mysql_query($qry,$this->connection);
         if($result && mysql_num_rows($result) > 0)
         {
             return false;
@@ -786,11 +758,9 @@ class FGMembersite
     
     function DBLogin()
     {
-
         $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
-
         if(!$this->connection)
-        {   
+        {
             $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
             return false;
         }
@@ -809,7 +779,7 @@ class FGMembersite
     
     function Ensuretable()
     {
-        $result = mysql_query("SHOW COLUMNS FROM $this->tablename");   
+        $result = mysql_query("SHOW COLUMNS FROM $this->tablename");
         if(!$result || mysql_num_rows($result) <= 0)
         {
             return $this->CreateTable();
@@ -831,8 +801,7 @@ class FGMembersite
 		"num_login INT NOT NULL ,".
                 "confirmcode VARCHAR(32) ,".
                 "PRIMARY KEY ( id_user )".
-                ")";
-//TODO DEBUG THIS
+                ")"; //TODO DEBUG THIS
 	
                 
         if(!mysql_query($qry,$this->connection))
@@ -847,24 +816,19 @@ class FGMembersite
     {
     
         $confirmcode = $this->MakeConfirmationMd5($formvars['email']);
-
         $formvars['confirmcode'] = $confirmcode;
-
 	$hash = $this->hashSSHA($formvars['password']);
-
 	$encrypted_password = $hash["encrypted"];
         
  
-
 	$salt = $hash["salt"];
         
       
-
  
         $insert_query = 'insert into '.$this->tablename.'(
 		name,
 		email,
-		username,	
+		username,
 		password,
 		salt,
 		num_login,
@@ -877,12 +841,10 @@ class FGMembersite
 		"' . $this->SanitizeForSQL($formvars['username']) . '",
 		"' . $encrypted_password . '",
 		"' . $salt . '",
-		0
+		0,
 		"' . $confirmcode . '"
 		)';
-
 		//TODO DEBUG THIS^^
-
  
         if(!mysql_query( $insert_query ,$this->connection))
         {
@@ -926,7 +888,6 @@ class FGMembersite
     function Sanitize($str,$remove_nl=true)
     {
         $str = $this->StripSlashes($str);
-
         if($remove_nl)
         {
             $injections = array('/(\n+)/i',
@@ -939,7 +900,6 @@ class FGMembersite
                 );
             $str = preg_replace($injections,'',$str);
         }
-
         return $str;
     }    
     function StripSlashes($str)

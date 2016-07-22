@@ -3,9 +3,9 @@
 header('Content-type: text/plain; charset=utf8', true);
 
 $db = array(
-    "16" => "020",
-    "14" => "003",
-    "13" => "002",
+    "16" => "021", /*Coffee Controller*/
+    "14" => "004", /*Bed Light*/
+    "13" => "002", /*Desk Lights*/
     "18:FE:AA:AA:AA:BB" => "TEMP-1.0.0"
 );
 
