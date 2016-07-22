@@ -1,0 +1,155 @@
+<?PHP
+require_once("/home/papaya/.access/membersite_config.php");
+
+if(!$fgmembersite->CheckLogin())
+{
+    $fgmembersite->RedirectToURL("access/login.php");
+    exit;
+}
+?>
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>PapI 2016</title>
+  <link href="style/tester.css" rel="stylesheet">
+</head>
+
+<nav id="nav01"></nav>
+
+<body>
+
+  <div id="main">
+  <h1>Device Manager</h1>
+  <h2>Your devices
+  <button class="button buttonGreen" onclick="addDevice()" class="button">Add Device</button>
+  <button class="button buttonRed" onclick="removeDevice()" class="button">Remove Device</button>
+  </h2>
+
+  <h2 style="display:none" id="noDevices">No Devices Yet!</h2>
+
+  <b><table style="display:none" id="addTitles" class="blank_table">
+    <tr>
+      <td id="title">Name</td>
+      <td id="title">Location</td>
+      <td id="title">Serial Number</td>
+      <td id="title">Type Number</td>
+    </tr>
+  </table></b>
+  <b><table style="display:none" id="removeTitles" class="blank_table">
+    <tr>
+      <td id="title">Serial Number</td>
+    </tr>
+  </table></b>
+
+  <form style="display:none" id="addDevice" action="confirmAdd.php" method="post">
+    <input type="text" class="textbox" name="addName">
+    <input type="text" class="textbox" name="addLocation">
+    <input type="text" class="textbox" name="addSerial">
+    <input type="text" class="textbox" name="addType"><br>
+    <input type="submit" class="button" value="Submit">
+  </form>
+
+  <form style="display:none" id="removeDevice" action="confirmRemove.php" method="post">
+    <input type="text" class="textbox" name="removeSerial">
+    <input type="submit" class="button" value="Submit">
+  </form>
+
+  <button id="clearButton" class="button"  style="display:none; background-color: #f44336;" onclick="clearDevices()" class="button">Clear</button>
+
+  <script>
+  function clearDevices() {
+    document.getElementById("addTitles").style.display = "none";
+    document.getElementById("removeTitles").style.display = "none";
+    document.getElementById("clearButton").style.display = "none";
+    document.getElementById("addDevice").style.display = "none";
+    document.getElementById("removeDevice").style.display = "none";
+    document.getElementById("noDevices").style.display = "initial";
+  }
+  function addDevice() {
+    clearDevices()
+    document.getElementById("addTitles").style.display = "table";
+    document.getElementById("clearButton").style.display = "initial";
+    document.getElementById("addDevice").style.display = "initial";
+  }
+  function removeDevice() {
+    clearDevices()
+    document.getElementById("removeTitles").style.display = "table";
+    document.getElementById("removeDevice").style.display = "initial";
+    document.getElementById("clearButton").style.display = "initial";
+  }
+  function noDevices() {
+    clearDevices()
+    document.getElementById("noDevices").style.display = "initial";
+  }
+  </script>
+
+<br></br>
+<?php
+$servername = "ha-records.cxdm8r7jhkbf.us-east-1.rds.amazonaws.com";
+$username = "phpUser";
+$password = "24518000phpUser";
+$database = "ha_records";
+
+if($_GET)
+{
+    if(isset($_GET['submitButton']))
+    {
+        submit();
+    }
+    elseif(isset($_GET['select']))
+    {
+        select();
+    }
+}
+$conn = new mysqli($servername, $username, $password, $database);
+
+$_SESSION['user_name'] = $fgmembersite->UserUserName();
+$_SESSION['user_nameF'] = "'" . $_SESSION['user_name'] . "'";
+
+if ($conn->connect_error)
+{
+        die("Connection failed: " .$conn->connect_error);
+}
+$_SESSION['sql'] = "SELECT * FROM devices WHERE user_name = " . $_SESSION['user_nameF'];
+
+$_SESSION['result'] = $conn->query($_SESSION['sql']);
+
+if ($_SESSION['result']->num_rows > 0)
+{
+        echo '<table class="dataTable" style="width: 75%">' . "\r\n" . '  <tr id="dataTableRow">' . "\r\n";
+        echo '<td><b>Name</b></td><td><b>Location</b></td><td><b>Serial Number</b></td><td><b>Type Num</b></td></tr><tr>';
+        while ($_SESSION['row'] = $_SESSION['result']->fetch_assoc())
+        {
+                echo "<td>" . $_SESSION['row']["name"] . "</td>" . "\r\n";
+                echo "<td>" . $_SESSION['row']["location"] . "</td>" . "\r\n";
+                echo "<td>" . $_SESSION['row']["serial_num"] . "</td>" . "\r\n";
+                echo "<td>" . $_SESSION['row']["type_num"] . "</td>" . "\r\n";
+                echo "</tr>" . "\r\n";
+        }
+        echo "</table>" . "\r\n";
+}
+else
+{
+        echo '<script>' . 'noDevices();' . '</script>';
+}
+/* function submit()
+{
+	echo "submitting to sql";
+	$name = $_POST['addName'];
+	$location = $_POST['addLocation'];
+	$serial = $_POST['addSerial'];
+	$type = $_POST['addType'];
+	//echo "name: " . $name . "\r\n";
+	//$sql = "INSERT INTO devices (name, location, serial_num, type_num) VALUES ($name, $location, $serial, $type)";
+	//$result = $conn->query($sql);
+} */
+?>
+
+  <footer id="papFoot"></footer>
+  </div>
+
+<script src="scripts/tester.js"></script>
+
+</body>
+</html>

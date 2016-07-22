@@ -1,0 +1,8 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+[remote "origin"]
+	url = https://git-codecommit.us-east-1.amazonaws.com/v1/repos/adminPage
+	fetch = +refs/heads/*:refs/remotes/origin/*
