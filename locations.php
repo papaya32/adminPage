@@ -20,67 +20,62 @@ if(!$fgmembersite->CheckLogin())
 <body>
 
   <div id="main">
-  <h1>Device Manager</h1>
-  <h2>Your devices
-  <button class="button buttonGreen" onclick="addDevice()" class="button">Add Device</button>
-  <button class="button buttonRed" onclick="removeDevice()" class="button">Remove Device</button>
+  <h1>Location Manager</h1>
+  <h2>Your locations
+  <button class="button buttonGreen" onclick="addLocation()" class="button">Add Location</button>
+  <button class="button buttonRed" onclick="removeLocation()" class="button">Remove Location</button>
   </h2>
 
-  <h2 style="display:none" id="noDevices">No Devices Yet!</h2>
+  <h2 style="display:none" id="noLocations">No Locations Yet!</h2>
 
   <b><table style="display:none" id="addTitles" class="blank_table">
     <tr>
-      <td id="title">Name</td>
       <td id="title">Location</td>
-      <td id="title">Serial Number</td>
-      <td id="title">Type Number</td>
+      <td id="title">Devices</td>
     </tr>
   </table></b>
   <b><table style="display:none" id="removeTitles" class="blank_table">
     <tr>
-      <td id="title">Serial Number</td>
+      <td id="title">Location</td>
     </tr>
   </table></b>
 
-  <form style="display:none" id="addDevice" action="confirmAdd.php" method="post">
-    <input type="text" class="textbox" name="addName">
+  <form style="display:none" id="addLocation" action="addLocation.php" method="post">
     <input type="text" class="textbox" name="addLocation">
-    <input type="text" class="textbox" name="addSerial">
-    <input type="text" class="textbox" name="addType"><br>
     <input type="submit" class="button" value="Submit">
   </form>
 
-  <form style="display:none" id="removeDevice" action="confirmRemove.php" method="post">
-    <input type="text" class="textbox" name="removeSerial">
+  <form style="display:none" id="removeLocation" action="removeLocation.php" method="post">
+    <input type="text" class="textbox" name="removeLocation">
     <input type="submit" class="button" value="Submit">
   </form>
 
-  <button id="clearButton" class="button"  style="display:none; background-color: #f44336;" onclick="clearDevices()" class="button">Clear</button>
+  <button id="clearButton" class="button"  style="display:none; background-color: #f44336;" onclick="clearLocations()" class="button">Clear</button>
 
   <script>
-  function clearDevices() {
+  function clearLocations() {
     document.getElementById("addTitles").style.display = "none";
     document.getElementById("removeTitles").style.display = "none";
     document.getElementById("clearButton").style.display = "none";
-    document.getElementById("addDevice").style.display = "none";
-    document.getElementById("removeDevice").style.display = "none";
-    document.getElementById("noDevices").style.display = "none";
+    document.getElementById("addLocation").style.display = "none";
+    document.getElementById("removeLocation").style.display = "none";
+    document.getElementById("noLocations").style.display = "none";
   }
-  function addDevice() {
-    clearDevices()
+  function addLocation() {
+    clearLocations()
     document.getElementById("addTitles").style.display = "table";
     document.getElementById("clearButton").style.display = "initial";
-    document.getElementById("addDevice").style.display = "initial";
+    document.getElementById("addLocation").style.display = "initial";
   }
-  function removeDevice() {
-    clearDevices()
+  function removeLocation() {
+    clearLocations()
     document.getElementById("removeTitles").style.display = "table";
-    document.getElementById("removeDevice").style.display = "initial";
+    document.getElementById("removeLocation").style.display = "initial";
     document.getElementById("clearButton").style.display = "initial";
   }
-  function noDevices() {
-    clearDevices()
-    document.getElementById("noDevices").style.display = "initial";
+  function noLocations() {
+    clearLocations()
+    document.getElementById("noLocations").style.display = "initial";
   }
   </script>
 
@@ -111,27 +106,24 @@ if ($conn->connect_error)
 {
         die("Connection failed: " .$conn->connect_error);
 }
-$_SESSION['sql'] = "SELECT * FROM devices WHERE user_name = " . $_SESSION['user_nameF'];
+$_SESSION['sql'] = "SELECT location_name FROM locations WHERE user_name = " . $_SESSION['user_nameF'];
 
 $_SESSION['result'] = $conn->query($_SESSION['sql']);
 
 if ($_SESSION['result']->num_rows > 0)
 {
         echo '<table class="dataTable" style="width: 75%">' . "\r\n" . '  <tr id="dataTableRow">' . "\r\n";
-        echo '<td><b>Name</b></td><td><b>Location</b></td><td><b>Serial Number</b></td><td><b>Type Num</b></td></tr><tr>';
+        echo '<td><b>Location</b></td><td><b>Devices</b></td></tr><tr>';
         while ($_SESSION['row'] = $_SESSION['result']->fetch_assoc())
         {
-                echo "<td>" . $_SESSION['row']["name"] . "</td>" . "\r\n";
-                echo "<td>" . $_SESSION['row']["location"] . "</td>" . "\r\n";
-                echo "<td>" . $_SESSION['row']["serial_num"] . "</td>" . "\r\n";
-                echo "<td>" . $_SESSION['row']["type_num"] . "</td>" . "\r\n";
+                echo "<td>" . $_SESSION['row']["location_name"] . "</td>" . "\r\n";
                 echo "</tr>" . "\r\n";
         }
         echo "</table>" . "\r\n";
 }
 else
 {
-        echo '<script>' . 'noDevices();' . '</script>';
+        echo '<script>' . 'noLocations();' . '</script>';
 }
 /* function submit()
 {
