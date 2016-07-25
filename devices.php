@@ -44,24 +44,43 @@ if(!$fgmembersite->CheckLogin())
 
   <form style="display:none" id="addDevice" action="confirmAdd.php" method="post">
     <input type="text" class="textbox" name="addName">
-    <!-- <input type="text" class="textbox" name="addLocation"> -->
-    <select name="addLocation">
+    <select name="addLocation" class="textbox">
 <?php
+$servername = "ha-records.cxdm8r7jhkbf.us-east-1.rds.amazonaws.com";
+$username = "phpUser";
+$password = "24518000phpUser";
+$database = "ha_records";
+
+$conn = new mysqli($servername, $username, $password, $database);
+
 $user_name = $fgmembersite->UserUserName();
 $user_nameF = "'" . $user_name . "'";
 
 $sql = "SELECT location_name FROM locations WHERE user_name=" . $user_nameF;
 
+if ($conn->connect_error)
+{
+        die("Connection failed: " .$conn->connect_error);
+}
+
 $result = $conn->query($sql);
+
+while ($row = $result->fetch_assoc())
+  {
+    echo "<option value='" . $row['location_name'] . "'>" . $row['location_name'] . "</option>";
+  }
+?>
+  </select>
     <input type="text" class="textbox" name="addSerial">
-    <input type="text" class="textbox" name="addType"><br>
+    <input type="text" class="textbox" name="addType">
+    <br>
     <input type="submit" class="button" value="Submit">
   </form>
-
   <form style="display:none" id="removeDevice" action="confirmRemove.php" method="post">
     <input type="text" class="textbox" name="removeSerial">
     <input type="submit" class="button" value="Submit">
   </form>
+
 
   <button id="clearButton" class="button"  style="display:none; background-color: #f44336;" onclick="clearDevices()" class="button">Clear</button>
 
@@ -71,7 +90,7 @@ $result = $conn->query($sql);
     document.getElementById("removeTitles").style.display = "none";
     document.getElementById("clearButton").style.display = "none";
     document.getElementById("addDevice").style.display = "none";
-    document.getElementById("removeDevice").style.display = "none";
+//    document.getElementById("removeDevice").style.display = "none";
     document.getElementById("noDevices").style.display = "none";
   }
   function addDevice() {
@@ -79,6 +98,7 @@ $result = $conn->query($sql);
     document.getElementById("addTitles").style.display = "table";
     document.getElementById("clearButton").style.display = "initial";
     document.getElementById("addDevice").style.display = "initial";
+//    document.getElementById("addLocation").style.display = "initial";
   }
   function removeDevice() {
     clearDevices()
@@ -94,12 +114,8 @@ $result = $conn->query($sql);
 
 <br></br>
 <?php
-$servername = "ha-records.cxdm8r7jhkbf.us-east-1.rds.amazonaws.com";
-$username = "phpUser";
-$password = "24518000phpUser";
-$database = "ha_records";
 
-if($_GET)
+/* if($_GET)
 {
     if(isset($_GET['submitButton']))
     {
@@ -109,7 +125,9 @@ if($_GET)
     {
         select();
     }
-}
+}*/
+
+
 $conn = new mysqli($servername, $username, $password, $database);
 
 $_SESSION['user_name'] = $fgmembersite->UserUserName();

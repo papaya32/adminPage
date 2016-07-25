@@ -912,41 +912,34 @@ http://www.html-form-guide.com/php-form/php-login-form.html */ require_once("cla
     }    
 
     // ----- Custom PapI Fucntions ------
-    function addDevice($name, $location, $serial, $type)
+    function addDevice($name, $location, $addSerial, $addType)
     {
-      if (!(strlen($name) <= 50))
+      if !(strlen($name) <= 50)
       {
         $this->HandleError("Name must be less than 50 characters");
         return false;
       }
-      if (!((is_numeric($serial) && strlen($serial) == 7)))
+      if !((is_numeric($serial) && strlen((string)$serial) == 7)
       {
         $this->HandleError("Serial field must be numeric and 7 numbers");
         return false;
       }
-
-      if (!(is_numeric($type) && (strlen($type) == 2)))
+      if !((is_numeric($addType) && strlen((string)$addType) == 7)
       {
         $this->HandleError("Type field must be numeric and 2 numbers");
         return false;
       }
-      $nameF = "'" . $name . "',";
-      $locationF = "'" . $location . "',";
-      $serialF = "'" . $serial . "',";
-      $typeF = "'" . $type . "',";
       $user_name = $this->UserUserName();
+      $nameF = "'" . $_POST["addName"] . "',";
+      $locationF = "'" . $_POST["addLocation"] . "',";
+      $serialF = "'" . $_POST["addSerial"] . "',";
+      $typeF = "'" . $_POST["addType"] . "',";
       $user_nameF = "'" . $user_name . "'";
 
       $sql = "INSERT INTO devices (name, location, serial_num, type_num, user_name) VALUES (" . $nameF . $locationF . $serialF . $typeF . $user_nameF . ")";
 
-      if(!$this->DBLogin())
-      {
-        $this->HandleError("Database login failed!");
-        return false;
-      }
-      $result = mysql_query($sql, $this->connection) or die(mysql_error());
-      //$result = $sql;
-      return $result;
-    }
+      $result = mysql_query($sql);
+      echo $result;
+      return true;
 }
 ?>

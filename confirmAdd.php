@@ -33,33 +33,18 @@ if(!$fgmembersite->CheckLogin())
   }
 </script>
 <?php
-$servername = "ha-records.cxdm8r7jhkbf.us-east-1.rds.amazonaws.com";
-$username = "phpUser";
-$password = "24518000phpUser";
-$database = "ha_records";
-
-$conn = new mysqli($servername, $username, $password, $database);
-
 $name = $_POST["addName"];
 $location = $_POST["addLocation"];
 $serial = $_POST["addSerial"];
 $type = $_POST["addType"];
-$user_name = $fgmembersite->UserUserName();
 
-if ((strlen($name) <= 50) && (strlen($location) <= 50) && (is_numeric($serial) == TRUE) && (is_numeric($type) == TRUE) && (strlen(strval($serial)) == 7) && (strlen(strval($type)) == 2))
+$result = $fgmembersite->AddDevice($name, $location, $serial, $type);
+if ($result != false)
 {
+  echo "HERE2";
+  echo $result;
   echo "<script>deviceConfirm()</script>";
-if ($conn->connect_error) {
-        die("Connection failed: " .$conn->connect_error);
-}
-
-$nameF = "'" . $_POST["addName"] . "',";
-$locationF = "'" . $_POST["addLocation"] . "',";
-$serialF = "'" . $_POST["addSerial"] . "',";
-$typeF = "'" . $_POST["addType"] . "',";
-$user_nameF = "'" . $user_name . "'";
-
-echo'  <table class="blank_table">
+  echo'  <table class="blank_table">
     <tr>
       <td>Name</td>
       <td>Location</td>
@@ -67,25 +52,17 @@ echo'  <table class="blank_table">
       <td>Type Number</td>
     </tr>
     <tr>
-      <td>' . $_POST["addName"] . '</td>
-      <td>' . $_POST["addLocation"] . '</td>
-      <td>' . $_POST["addSerial"] . '</td>
-      <td>' . $_POST["addType"] . '</td>
+      <td>' . $name . '</td>
+      <td>' . $location . '</td>
+      <td>' . $serial . '</td>
+      <td>' . $type . '</td>
     </tr>
   </table>';
-
-$sql = "INSERT INTO devices (name, location, serial_num, type_num, user_name) VALUES (" . $nameF . $locationF . $serialF . $typeF . $user_nameF . ")";
-
-$result = $conn->query($sql);
-
-$old_path = getcwd();
-chdir('/home/papaya');
-$command = "sudo ./tester.sh \"$name\" \"$location\" \"$serial\" \"$type\" \"itemChange\"";
-$output = shell_exec($command);
-chdir($old_path);
 }
 else
 {
+  echo "HERE3";
+  echo $fgmembersite->GetErrorMessage();
   echo "<script>deviceFail()</script>";
 }
 ?>
