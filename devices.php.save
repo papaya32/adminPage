@@ -52,6 +52,22 @@ $user_nameF = "'" . $user_name . "'";
 
 $sql = "SELECT location_name FROM locations WHERE user_name=" . $user_nameF;
 
+if ($_SESSION['result']->num_rows > 0)
+{
+        echo '<table class="dataTable" style="width: 75%">' . "\r\n" . '  <tr id$
+        echo '<td><b>Name</b></td><td><b>Location</b></td><td><b>Serial Number</$
+        while ($_SESSION['row'] = $_SESSION['result']->fetch_assoc())
+        {
+                echo "<td>" . $_SESSION['row']["name"] . "</td>" . "\r\n";
+                echo "<td>" . $_SESSION['row']["location"] . "</td>" . "\r\n";
+                echo "<td>" . $_SESSION['row']["serial_num"] . "</td>" . "\r\n";
+                echo "<td>" . $_SESSION['row']["type_num"] . "</td>" . "\r\n";
+                echo "</tr>" . "\r\n";
+        }
+        echo "</table>" . "\r\n";
+}
+
+
 $result = $conn->query($sql);
     <input type="text" class="textbox" name="addSerial">
     <input type="text" class="textbox" name="addType"><br>
