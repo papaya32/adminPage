@@ -954,8 +954,8 @@ http://www.html-form-guide.com/php-form/php-login-form.html */ require_once("cla
       $user_name = $this->UserUserName();
       $user_nameF = "'" . $user_name . "'";
 
-      $sql = "SELECT location_name FROM locations WHERE user_name=" . $user_nameF;
-      if(!$this->DBLogin())
+      $sql = "SELECT location_name FROM locations WHERE user_name = " . $user_nameF;
+      if (!$this->DBLogin())
       {
         $this->HandleError("Database login failed!");
         return false;
@@ -978,21 +978,7 @@ http://www.html-form-guide.com/php-form/php-login-form.html */ require_once("cla
       }
       $result = mysql_query($sql, $this->connection) or die(mysql_error());
       return $result;
-    }
-
-    function GetDevices()
-    {
-      $user_name = $this->UserUserName();
-      $user_nameF = "'" . $user_name . "'";
-
-      $sql = "SELECT * FROM devices WHERE user_name=" . $user_nameF;
-      if (!$this->DBLogin())
-      {
-        $this->HandleError("Database login failed!");
-        return false;
-      }
-      $result = mysql_query($sql, $this->connection) or die(mysql_error());
-      return $result;
-    }
+    }//8005212232
+//8004928373
 }
 ?>

@@ -21,8 +21,6 @@ if(!$fgmembersite->CheckLogin())
   <div id="main">
   <h1 style="visibility:hidden" id="deviceConfirm">New Device Added!</h1>
   <h1 style="visibility:hidden" id="deviceFail">Failed to Add Device!</h1>
-  <a href='tester.php' class="button buttonGreen">Home</a>
-  <a href='devices.php' class="button buttonGreen">Return to Devices</a>
 
 <script>
   function deviceFail() {
@@ -41,8 +39,6 @@ $type = $_POST["addType"];
 $result = $fgmembersite->AddDevice($name, $location, $serial, $type);
 if ($result != false)
 {
-  echo "HERE2";
-  echo $result;
   echo "<script>deviceConfirm()</script>";
   echo'  <table class="blank_table">
     <tr>
@@ -61,11 +57,13 @@ if ($result != false)
 }
 else
 {
-  echo "HERE3";
-  echo $fgmembersite->GetErrorMessage();
+  echo "<div><span class='error'>" . $fgmembersite->GetErrorMessage() . "</span></div>";
   echo "<script>deviceFail()</script>";
 }
 ?>
+  <br>
+  <a href='tester.php' class="button buttonGreen">Home</a>
+  <a href='devices.php' class="button buttonGreen">Return to Devices</a>
 
 
   <br>

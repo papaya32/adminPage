@@ -81,43 +81,36 @@ if(!$fgmembersite->CheckLogin())
 
 <br></br>
 <?php
-$servername = "ha-records.cxdm8r7jhkbf.us-east-1.rds.amazonaws.com";
-$username = "phpUser";
-$password = "24518000phpUser";
-$database = "ha_records";
+$result = $fgmembersite->GetLocations();
 
-if($_GET)
-{
-    if(isset($_GET['submitButton']))
-    {
-        submit();
-    }
-    elseif(isset($_GET['select']))
-    {
-        select();
-    }
-}
-$conn = new mysqli($servername, $username, $password, $database);
-
-$_SESSION['user_name'] = $fgmembersite->UserUserName();
-$_SESSION['user_nameF'] = "'" . $_SESSION['user_name'] . "'";
-
-if ($conn->connect_error)
-{
-        die("Connection failed: " .$conn->connect_error);
-}
-$_SESSION['sql'] = "SELECT location_name FROM locations WHERE user_name = " . $_SESSION['user_nameF'];
-
-$_SESSION['result'] = $conn->query($_SESSION['sql']);
-
-if ($_SESSION['result']->num_rows > 0)
+if (/*($result != false) && ($result->num_rows > 0)*/true)
 {
         echo '<table class="dataTable" style="width: 75%">' . "\r\n" . '  <tr id="dataTableRow">' . "\r\n";
-        echo '<td><b>Location</b></td><td><b>Devices</b></td></tr><tr>';
-        while ($_SESSION['row'] = $_SESSION['result']->fetch_assoc())
+        echo '<td><b>Location</b></td><td><b>Devices</b></td></tr>';
+        while ($row = mysql_fetch_assoc($result))
         {
-                echo "<td>" . $_SESSION['row']["location_name"] . "</td>" . "\r\n";
-                echo "</tr>" . "\r\n";
+                echo "<tr><td>" . $row["location_name"] . "</td>";
+                $resultD = $fgmembersite->GetDevicesInLocations($row["location_name"]);
+		$temp = 1;
+		if (mysql_num_rows($resultD) > 0)
+		{
+                  while ($rowD = mysql_fetch_assoc($resultD))
+                  {
+                    if ($temp == 1)
+                    {
+                      $temp = 0;
+                    }
+		    else
+                    {
+                      echo "<tr><td></td>";
+                    }
+                    echo "<td>" . $rowD["name"] . "</td></tr>\r\n";
+                  }
+		}
+		else
+		{
+		  echo "<td><i>None</i></td></tr>";
+		}
         }
         echo "</table>" . "\r\n";
 }

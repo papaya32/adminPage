@@ -114,26 +114,52 @@ while ($row = $result->fetch_assoc())
 
 <br></br>
 <?php
-  $result = $fgmembersite->GetDevices();
 
-  if (($result != false) && (mysql_num_rows($result) > 0))
-  {
-    echo '<table class="dataTable" style="width: 75%">' . "\r\n" . '  <tr id="dataTableRow">' . "\r\n";
-    echo '<td><b>Name</b></td><td><b>Location</b></td><td><b>Serial Number</b></td><td><b>Type Num</b></td></tr><tr>';
-    while ($row = mysql_fetch_assoc($result))
+/* if($_GET)
+{
+    if(isset($_GET['submitButton']))
     {
-      echo "<td>" . $row["name"] . "</td>" . "\r\n";
-      echo "<td>" . $row["location"] . "</td>" . "\r\n";
-      echo "<td>" . $row["serial_num"] . "</td>" . "\r\n";
-      echo "<td>" . $row["type_num"] . "</td>" . "\r\n";
-      echo "</tr>" . "\r\n";
+        submit();
     }
-    echo "</table>" . "\r\n";
-  }
-  else
-  {
-    echo '<script>' . 'noDevices();' . '</script>';
-  }
+    elseif(isset($_GET['select']))
+    {
+        select();
+    }
+}*/
+
+
+<div><span class='error'><?php echo $fgmembersite->GetErrorMessage(); ?></span></div>
+
+
+if ($_SESSION['result']->num_rows > 0)
+{
+        echo '<table class="dataTable" style="width: 75%">' . "\r\n" . '  <tr id="dataTableRow">' . "\r\n";
+        echo '<td><b>Name</b></td><td><b>Location</b></td><td><b>Serial Number</b></td><td><b>Type Num</b></td></tr><tr>';
+        while ($_SESSION['row'] = $_SESSION['result']->fetch_assoc())
+        {
+                echo "<td>" . $_SESSION['row']["name"] . "</td>" . "\r\n";
+                echo "<td>" . $_SESSION['row']["location"] . "</td>" . "\r\n";
+                echo "<td>" . $_SESSION['row']["serial_num"] . "</td>" . "\r\n";
+                echo "<td>" . $_SESSION['row']["type_num"] . "</td>" . "\r\n";
+                echo "</tr>" . "\r\n";
+        }
+        echo "</table>" . "\r\n";
+}
+else
+{
+        echo '<script>' . 'noDevices();' . '</script>';
+}
+/* function submit()
+{
+	echo "submitting to sql";
+	$name = $_POST['addName'];
+	$location = $_POST['addLocation'];
+	$serial = $_POST['addSerial'];
+	$type = $_POST['addType'];
+	//echo "name: " . $name . "\r\n";
+	//$sql = "INSERT INTO devices (name, location, serial_num, type_num) VALUES ($name, $location, $serial, $type)";
+	//$result = $conn->query($sql);
+} */
 ?>
 
   <footer id="papFoot"></footer>
