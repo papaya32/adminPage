@@ -949,6 +949,34 @@ http://www.html-form-guide.com/php-form/php-login-form.html */ require_once("cla
       return $result;
     }
 
+    function AddLocation($location_name)
+    {
+      $user_name = $this->UserUserName();
+      $user_nameF = "'" . $user_name . "'";
+      $location_nameF = "'" . $location_name . "', ";
+
+      if ((strlen($location_name) > 50))
+      {
+        $this->HandleError("Name must be less than 50 characters");
+        return false;
+      }
+      if (empty($location_name))
+      {
+        $this->HandleError("Name must not be empty!");
+        return false;
+      }
+      $sql = "INSERT INTO locations (location_name, user_name) VALUES (" . $location_nameF . $user_nameF . ")";
+
+      if (!$this->DBLogin())
+      {
+        $this->HandleError("Database login failed!");
+        return false;
+      }
+      $result = mysql_query($sql, $this->connection) or die(mysql_error());
+//      $result = mysql_query($sql, $this->connection) or die($sql);
+      return $result;
+    }
+
     function GetLocations()
     {
       $user_name = $this->UserUserName();

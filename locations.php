@@ -31,7 +31,6 @@ if(!$fgmembersite->CheckLogin())
   <b><table style="display:none" id="addTitles" class="blank_table">
     <tr>
       <td id="title">Location</td>
-      <td id="title">Devices</td>
     </tr>
   </table></b>
   <b><table style="display:none" id="removeTitles" class="blank_table">
@@ -82,14 +81,16 @@ if(!$fgmembersite->CheckLogin())
 <br></br>
 <?php
 $result = $fgmembersite->GetLocations();
+$deleteButt1 = "<td><form action='removeLocation.php' method='post'><input type='hidden' name='removeLocation' value='";
+$deleteButt2 = "'/><button><img src='./assets/trash-icon.png' width='20' height='20' border='0'/></button></form></td>";
 
-if (/*($result != false) && ($result->num_rows > 0)*/true)
+if (($result != false) && (mysql_num_rows($result) > 0))
 {
         echo '<table class="dataTable" style="width: 75%">' . "\r\n" . '  <tr id="dataTableRow">' . "\r\n";
-        echo '<td><b>Location</b></td><td><b>Devices</b></td></tr>';
+        echo '<td/ class="delete"><td><b>Location</b></td><td><b>Devices</b></td></tr>';
         while ($row = mysql_fetch_assoc($result))
         {
-                echo "<tr><td>" . $row["location_name"] . "</td>";
+                echo "<tr>" . $deleteButt1 . $row["location_name"] . $deleteButt2 . "<td>" . $row["location_name"] . "</td>";
                 $resultD = $fgmembersite->GetDevicesInLocations($row["location_name"]);
 		$temp = 1;
 		if (mysql_num_rows($resultD) > 0)
@@ -102,7 +103,7 @@ if (/*($result != false) && ($result->num_rows > 0)*/true)
                     }
 		    else
                     {
-                      echo "<tr><td></td>";
+                      echo "<tr><td/><td/>";
                     }
                     echo "<td>" . $rowD["name"] . "</td></tr>\r\n";
                   }
@@ -118,17 +119,6 @@ else
 {
         echo '<script>' . 'noLocations();' . '</script>';
 }
-/* function submit()
-{
-	echo "submitting to sql";
-	$name = $_POST['addName'];
-	$location = $_POST['addLocation'];
-	$serial = $_POST['addSerial'];
-	$type = $_POST['addType'];
-	//echo "name: " . $name . "\r\n";
-	//$sql = "INSERT INTO devices (name, location, serial_num, type_num) VALUES ($name, $location, $serial, $type)";
-	//$result = $conn->query($sql);
-} */
 ?>
 
   <footer id="papFoot"></footer>

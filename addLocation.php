@@ -21,8 +21,6 @@ if(!$fgmembersite->CheckLogin())
   <div id="main">
   <h1 style="visibility:hidden" id="locationConfirm">New Location Added!</h1>
   <h1 style="visibility:hidden" id="locationFail">Failed to Add Location!</h1>
-  <a href='tester.php' class="button buttonGreen">Home</a>
-  <a href='locations.php' class="button buttonGreen">Return to Locations</a>
 
 <script>
   function locationFail() {
@@ -33,51 +31,32 @@ if(!$fgmembersite->CheckLogin())
   }
 </script>
 <?php
-$servername = "ha-records.cxdm8r7jhkbf.us-east-1.rds.amazonaws.com";
-$username = "phpUser";
-$password = "24518000phpUser";
-$database = "ha_records";
-
-$conn = new mysqli($servername, $username, $password, $database);
-
 $name = $_POST["addLocation"];
-$user_name = $fgmembersite->UserUserName();
 
-if (strlen($name) <= 50)
-{
-  echo "<script>locationConfirm()</script>";
-if ($conn->connect_error) {
-        die("Connection failed: " .$conn->connect_error);
-}
+  $result = $fgmembersite->AddLocation($name);
 
-$nameF = "'" . $_POST["addLocation"] . "',";
-$user_nameF = "'" . $user_name . "'";
-
-echo'  <table class="blank_table">
+  if ($result == false)
+  {
+    echo "<div><span class='error'>" . $fgmembersite->GetErrorMessage() . "</span></div>";
+    echo "<script>locationFail()</script>";
+  }
+  else
+  {
+    echo "<script>locationConfirm()</script>";
+    echo '  <table class="blank_table">
     <tr>
-      <td>Location</td>
-    </tr>
-    <tr>
-      <td>' . $_POST["addLocation"] . '</td>
-    </tr>
-  </table>';
-
-$sql = "INSERT INTO locations (location_name, user_name) VALUES (" . $nameF . $user_nameF . ")";
-
-$result = $conn->query($sql);
-
-/* $old_path = getcwd();
-chdir('/home/papaya');
-$command = "sudo ./tester.sh \"$name\" \"$location\" \"$serial\" \"$type\" \"itemChange\"";
-$output = shell_exec($command);
-chdir($old_path); */
-}
-else
-{
-  echo "<script>locationFail()</script>";
-}
+        <td>Location</td>
+      </tr>
+      <tr>
+        <td>' . $_POST["addLocation"] . '</td>
+      </tr>
+    </table>';
+  }
 ?>
+  <br>
 
+  <a href='tester.php' class="button buttonGreen">Home</a>
+  <a href='locations.php' class="button buttonGreen">Return to Locations</a>
 
   <br>
 
