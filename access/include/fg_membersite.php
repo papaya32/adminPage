@@ -1022,5 +1022,47 @@ http://www.html-form-guide.com/php-form/php-login-form.html */ require_once("cla
       $result = mysql_query($sql, $this->connection) or die(mysql_error());
       return $result;
     }
+
+    function AddToBarTab($name, $price)
+    {
+/*      require_once("/home/papaya/.access/membersite_config.php");
+      $name = $_GET["name"];
+      $price = $_GET["price"];
+      $nameF = "'" . $name . "'";
+      $sql1 = "SELECT tab FROM barTab WHERE name=" . $nameF;
+      if (!$fgmembersite->DBLogin())
+      {
+        $fgmembersite->HandleError("Database login failed!");
+      }
+      $result1 = mysql_query($sql1, $fgmembersite->connection) or die(mysql_error());
+
+      $row = mysql_fetch_assoc($result1);
+
+      $tab = (float)$row["tab"];
+      $newTab = (float)$price + $tab;
+      $newTab = "'" . strval($newTab) . "'";
+      $sql2 = "UPDATE barTab SET tab=" . strval($newTab) . " WHERE name=" . $nameF;
+      $result2 = mysql_query($sql2, $fgmembersite->connection) or die(mysql_error());
+*/
+
+
+
+      $nameF = "'" . $name . "'";
+      $sql1 = "SELECT tab FROM barTab WHERE name=" . $nameF;
+      if (!$this->DBLogin())
+      {
+        $this->HandleError("Database login failed!");
+        return false;
+      }
+      $result1 = mysql_query($sql1, $this->connection) or die(mysql_error());
+      $row = mysql_fetch_assoc($result1);
+
+      $tab = (float)$row["tab"];
+      $newTab = (float)$price + $tab;
+      $sql2 = "UPDATE barTab SET tab=" . strval($newTab) . " WHERE name=" . $nameF;
+      $result2 = mysql_query($sql2, $this->connection) or die(mysql_error());
+
+      return $newTab;
+    }
 }
 ?>
