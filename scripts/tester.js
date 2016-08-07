@@ -21,11 +21,14 @@ var span = document.getElementsByClassName("close")[0];
 // When the user clicks the button, open the modal
 btn.onclick = function() {
     modal.style.display = "block";
+    var serial = btn.value;
+    deleteButt(serial);
 }
 
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-    modal.style.display = "none";
+function closeModal()
+{
+  var modal = document.getElementById('myModal');
+  modal.style.display = "none";
 }
 
 // When the user clicks anywhere outside of the modal, close it
@@ -35,6 +38,58 @@ window.onclick = function(event) {
     }
 }
 
+var deleteDevice;
+var deleteLocation;
+var clearName;
+
+function clearTab(name)
+{
+  var modal = document.getElementById('myModal');
+  modal.style.display = "block";
+  clearName = name;
+}
+
+function confirmClearTab()
+{
+  var request = new XMLHttpRequest();
+  var str = "clearName=" + clearName;
+  request.open("POST", "clear.php", true);
+  request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  request.send(str);
+  location.reload();
+}
+
+function deleteLoc(name)
+{
+  modal.style.display = "block";
+  deleteLocation = name;
+  deleteButt(serial);
+}
+
+function deleteDev(serial)
+{
+  modal.style.display = "block";
+  deleteDevice = serial;
+}
+
+function confirmDelDev()
+{
+  var request = new XMLHttpRequest();
+  var str = "removeSerial=" + deleteDevice;
+  request.open("POST", "confirmRemove.php", true);
+  request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  request.send(str);
+  location.reload();
+}  
+function confirmDelLoc()
+{
+  var request = new XMLHttpRequest();
+  var str = "removeLocation=" + deleteLocation;
+  request.open("POST", "removeLocation.php", true);
+  request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  request.send(str);
+  location.reload();
+}  
 var nameValue;
 var drinkValue;
 var priceValue;
@@ -69,26 +124,11 @@ function drink(temp, priceTemp)
   document.getElementById("drinkSubmit").style.display = "initial";
 }
 
-/* function drinkSubmit()
-{
-  var request = new XMLHttpRequest();
-  request.onreadystatechange = function() {
-    if (request.readyState == 4 && request.status == 200)
-      callback(request.responseText);
-  }
-  var callback = "mqtt.oreillyj.com";
-  var requestString = "/barTab/submit.php?name=" + nameValue + "&price=" + priceValue;
-  console.log(requestString);
-  request.open("GET", requestString, true);
-  request.send(null);
-} */
-
 function drinkSubmit()
 {
   var request = new XMLHttpRequest();
   var str = "/barTab/submit.php?name=" + nameValue + "&price=" + priceValue;
-  console.log(str);
-  request.open("GET", str, false);
+  request.open("GET", str, true);
   request.send(null);
   clearSection();
 //  return request.responseText;

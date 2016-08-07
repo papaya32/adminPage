@@ -1,2 +1,9 @@
 DirectoryIndex tester.php
 Options -Indexes
+AuthType Basic
+AuthName "restricted"
+AuthUserFile /var/www/.htpasswd
+
+<FilesMatch "^(manager.php)$">
+  Require user admin
+</FilesMatch>

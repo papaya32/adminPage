@@ -1064,5 +1064,29 @@ http://www.html-form-guide.com/php-form/php-login-form.html */ require_once("cla
 
       return $newTab;
     }
+
+  function GetBarTabs()
+  {
+    if (!$this->DBLogin())
+    {
+      $this->HandleError("Database login failed!");
+      return false;
+    }
+    $sql = "SELECT * FROM barTab";
+    $result = mysql_query($sql, $this->connection) or die(mysql_error());
+    return $result;
+  }
+
+  function ClearTab($name)
+  {
+    if (!$this->DBLogin())
+    {
+      $this->HandleError("Database login failed!");
+      return false;
+    }
+    $sql = "UPDATE barTab SET tab='0' WHERE name=" . "'" . $name . "'";
+    $result = mysql_query($sql, $this->connection) or die(mysql_error());
+    return $result;
+  }
 }
 ?>

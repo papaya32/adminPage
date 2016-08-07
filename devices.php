@@ -97,21 +97,21 @@ while ($row = mysql_fetch_assoc($result))
 <br></br>
 <?php
   $result = $fgmembersite->GetDevices();
-//  $deleteButt1 = "<td id='myBtn'><form id='myBtn' action='confirmRemove.php' method='post'><input type='hidden' name='removeSerial' id='myBtn' value='";
-//  $deleteButt2 = "'/><button id='myBtn'><img id='myBtn' src='./assets/trash-icon.png' width='20' height='20' border='0'/></button></form></td>";
-//  $deleteButt2 = "'/><button id='myBtn'><img src='./assets/trash-icon.png' width='20' height='20' border='0'/></button></form></td>";
-    $deleteButt1 = "<td><button id='myBtn'><img src='./assets/trash-icon.png' width='20' height='20' border='0'/></button>";
+//    $deleteButt1 = "<td><button value='";
+//    $deleteButt2 = "' id='myBtn'><img src='./assets/trash-icon.png' width='20' height='20' border='0'/></button>";
+  $deleteButt1 = '<td><button onclick="deleteDev(';
+  $deleteButt2 = ');"><img src="./assets/trash-icon.png" width="20" height="20" border="0"/></button>';
 
 //  echo "<button id='myBtn'>TESTER</button>";
 
   if (($result != false) && (mysql_num_rows($result) > 0))
   {
     echo '<table class="dataTable" style="width: 75%">' . "\r\n" . '  <tr id="dataTableRow">' . "\r\n";
-    echo '<td/ class="delete"><td><b>Name</b></td><td><b>Location</b></td><td><b>Serial Number</b></td><td><b>Type Num</b></td></tr><tr>';
+    echo '<td class="delete"/><td><b>Name</b></td><td><b>Location</b></td><td><b>Serial Number</b></td><td><b>Type Num</b></td></tr><tr>';
     while ($row = mysql_fetch_assoc($result))
     {
-//      echo $deleteButt1 . $row["serial_num"] . $deleteButt2;
-      echo $deleteButt1;
+      echo $deleteButt1 . "'" . $row["serial_num"] . "'" . $deleteButt2;
+//      echo $deleteButt1 . $deleteButt2;
       echo "<td>" . $row["name"] . "</td>" . "\r\n";
       echo "<td>" . $row["location"] . "</td>" . "\r\n";
       echo "<td>" . $row["serial_num"] . "</td>" . "\r\n";
@@ -130,14 +130,14 @@ while ($row = mysql_fetch_assoc($result))
   <!-- Modal content -->
   <div class="modal-content">
     <div class="modal-header">
-      <span class="close">×</span>
+      <span class="close">X</span>
       <h2>Confirm Delete</h2>
     </div>
     <div class="modal-body">
       <p>Click the button below to confirm deletion.</p>
     </div>
     <div class="modal-footer">
-      <h3><button class='buttonRed'>Confirm</button></h3>
+      <h3><button onclick=confirmDelDev() class='buttonRed'>Confirm</button></h3>
     </div>
   </div>
 

@@ -81,16 +81,17 @@ if(!$fgmembersite->CheckLogin())
 <br></br>
 <?php
 $result = $fgmembersite->GetLocations();
-$deleteButt1 = "<td><form action='removeLocation.php' method='post'><input type='hidden' name='removeLocation' value='";
-$deleteButt2 = "'/><button><img src='./assets/trash-icon.png' width='20' height='20' border='0'/></button></form></td>";
+$deleteButt1 = '<td><button onclick="deleteLoc(';
+$deleteButt2 = ');"><img src="./assets/trash-icon.png" width="20" height="20" border="0"/></button>';
 
 if (($result != false) && (mysql_num_rows($result) > 0))
 {
         echo '<table class="dataTable" style="width: 75%">' . "\r\n" . '  <tr id="dataTableRow">' . "\r\n";
-        echo '<td/ class="delete"><td><b>Location</b></td><td><b>Devices</b></td></tr>';
+        echo '<td class="delete"/><td><b>Location</b></td><td><b>Devices</b></td></tr>';
         while ($row = mysql_fetch_assoc($result))
         {
-                echo "<tr>" . $deleteButt1 . $row["location_name"] . $deleteButt2 . "<td>" . $row["location_name"] . "</td>";
+                echo $deleteButt1 . "'" . $row["location_name"] . "'" . $deleteButt2 . "</td>";
+		echo "<td>" . $row["location_name"] . "</td>";
                 $resultD = $fgmembersite->GetDevicesInLocations($row["location_name"]);
 		$temp = 1;
 		if (mysql_num_rows($resultD) > 0)
@@ -120,6 +121,23 @@ else
         echo '<script>' . 'noLocations();' . '</script>';
 }
 ?>
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close">X</span>
+      <h2>Confirm Delete</h2>
+    </div>
+    <div class="modal-body">
+      <p>Click the button below to confirm deletion.</p>
+    </div>
+    <div class="modal-footer">
+      <h3><button onclick=confirmDelLoc() class='buttonRed'>Confirm</button></h3>
+    </div>
+  </div>
+
+</div>
 
   <footer id="papFoot"></footer>
   </div>

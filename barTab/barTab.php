@@ -26,7 +26,7 @@ $imgVar2 = "' width='115' height='115' border='0'/>";
 </header>
 
 <div class="container">
-  <h1T>411 Bar Tab Dashboard</h1T>
+  <a href='manager.php'><h1T>411 Bar Tab Dashboard</h1T></a>
   <div class="right">
     <h2>906 Rose St</h2>
   </div>
