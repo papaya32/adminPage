@@ -1,0 +1,156 @@
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+<?php
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+$people = array(
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+"Alex"=>"caterpillar-icon.png"
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+,"Harrison"=>"battery-icon.png"
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+,"Jack"=>"wifi-icon.svg"
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+,"Bryce"=>"whale-icon.png"
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+,"tester2"=>"drink-icon.png"
+,"Colin"=>"new-user.png"
+//ADDUSERARRAY
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+);
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+$drinks = array(
+,"tester2"=>"16.03"
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+"Heineken"=>"heineken-icon.png"
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+,"Miller Lite"=>"miller-icon.png"
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+,"Coke"=>"coke-icon.png"
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+//ADDDRINKARRAY
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+);
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+$price = array(
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+"Heineken"=>"1.09"
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+,"Miller Lite"=>"0.96"
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+,"Coke"=>"0.48"
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+//ADDPRICEARRAY
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+);
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+$imgVar1 = "<img src='../assets/";
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+$imgVar2 = "' width='115' height='115' border='0'/>";
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+?>
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+<header>
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+  <title>PapI 2016</title>
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+  <link href="../style/dashboard.css" rel="stylesheet">
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+  <script src="../scripts/tester.js"></script>
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+</header>
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+<div class="container">
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+  <a href='manager.php'><h1T>411 Bar Tab Dashboard</h1T></a>
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+  <div class="right">
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+    <h2>906 Rose St</h2>
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+  </div>
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+  <div class='spacer'>
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+  <?php
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+  $user = "Bryce"; echo '<a href="javascript:name(' . "'" . $user . "'" . ')" class="box blue">'; echo $imgVar1 . $people[$user] . $imgVar2; echo '<h2>' . $user . '</h2></a>';
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+  $user = "Jack"; echo '<a href="javascript:name(' . "'" . $user . "'" . ')" class="box redgay">'; echo $imgVar1 . $people[$user] . $imgVar2; echo '<h2>' . $user . '</h2></a>';
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+  $user = "Harrison"; echo '<a href="javascript:name(' . "'" . $user . "'" . ')" class="box lime">'; echo $imgVar1 . $people[$user] . $imgVar2; echo '<h2>' . $user . '</h2></a>';
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+  Colin = "Colin"; echo '<a href="javascript:name(' . "'" . $user . "'" . ')" class="box blue">'; echo $imgVar1 . $people[$user] . $imgVar2; echo '<h2>' . $user . '</h2></a>';
+//ADDUSERHERE
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+  ?>
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+  </div>
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+  <div class='spacer'>
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+    <?php
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+    $drink = "Miller Lite";
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+    echo '
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+    <a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box blue">';
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+      echo $imgVar1 . $drinks["$drink"] . $imgVar2;
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+      echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>';
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+    echo '</a>';
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+    $drink = "Heineken";
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+    echo '
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+    <a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box lime">';
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+      echo $imgVar1 . $drinks["$drink"] . $imgVar2;
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+      echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>';
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+    echo '</a>';
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+    $drink = "Coke";
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+    echo '
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+    <a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">';
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+      echo $imgVar1 . $drinks["$drink"] . $imgVar2;
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+      echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>';
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+    echo '</a>';
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+    ?>
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+  </div>
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+</div>
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+<div id='container'>
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+  <h1>&emsp;</h1><h1 id='name' style='display:none'></h1><h1 style='display:none' id='filler1'>&nbsp;drank a&nbsp;</h1><h1 style='display:none' id='drink'></h1><h1 style='display:none' id='filler2'>&nbsp; for $</h1><h1 style='display:none' id='price'></h1><h1 id='test'>&nbsp;</h1>
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+  <button class='buttonGreen' onclick='drinkSubmit()' id='drinkSubmit' style='display:none'>Submit</button>
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+</div>
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+<div class='container'>
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+  <footer id="papFoot"></footer>
+$drink = tester2; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
+</div>

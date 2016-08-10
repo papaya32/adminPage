@@ -133,3 +133,20 @@ function drinkSubmit()
   clearSection();
 //  return request.responseText;
 }
+
+function barManSubmit(mode)
+{
+  var user = document.getElementById('barUserName').value;
+  var drink = document.getElementById('barDrinkName').value;
+  var price = document.getElementById('barPrice').value;
+
+  var request = new XMLHttpRequest();
+  var str = "addUser=" + user;
+  str += "&addDrink=" + drink;
+  str += "&drinkPrice=" + price;
+  str += "&mode=" + mode;
+  request.open("POST", "managerSubmit.php", true);
+  request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  request.send(str);
+  location.reload();
+}

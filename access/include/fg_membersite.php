@@ -1088,5 +1088,34 @@ http://www.html-form-guide.com/php-form/php-login-form.html */ require_once("cla
     $result = mysql_query($sql, $this->connection) or die(mysql_error());
     return $result;
   }
+
+  function AddBarUser($user)
+  {
+    $userF = "'" . $user . "'";
+    if (!$this->DBLogin())
+    {
+      $this->HandleError("Database login failed!");
+      return false;
+    }
+    $sql = "INSERT INTO barTab (name, tab) VALUES (" . $userF . ",'0')";
+    $result = mysql_query($sql, $this->connection) or die(mysql_error());
+    $old_path = getcwd();
+    chdir('/home/papaya/scripts/');
+    $bashScript = "sudo ./addUser.sh " . $user;
+    $output = shell_exec($bashScript);
+    chdir($old_path);
+    return $result;
+  }
+
+  function AddBarDrink($drink, $price)
+  {
+    $old_path = getcwd();
+    chdir('/home/papaya/scripts/');
+    $bashScript = "sudo ./addDrink.sh " . $drink . " " . $price;
+    $output = shell_exec($bashScript);
+    chdir($old_path);
+    return "Made it";
+  }
+
 }
 ?>
