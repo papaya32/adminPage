@@ -107,6 +107,15 @@ tr:nth-child(even) {
     padding: 8px;
     font-size: 18px;
 }
+.buttonBlue {
+    background-color: white;
+    color: #1E90FF;
+    border: 2px solid #1E90FF;
+    text-decoration: none;
+    margin: 4px 2px;
+    padding: 8px;
+    font-size: 18px;
+}
 .buttonGreen:hover {
     background-color: #4CAF50;
     color: white;
@@ -268,4 +277,17 @@ fieldset#antispam
     padding: 2px 16px;
     background-color: #f44336;
     color: white;
+}
+
+.strike {
+    position: relative;
+    display: inline-block;
+}
+.strike::before {
+    content: '';
+    border-bottom: 2px solid red;
+    width: 100%;
+    position: absolute;
+    right: 0;
+    top: 50%;
 }

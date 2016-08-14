@@ -1117,5 +1117,68 @@ http://www.html-form-guide.com/php-form/php-login-form.html */ require_once("cla
     return "Made it";
   }
 
+  function GetCategories()
+  {
+    if (!$this->DBLogin())
+    {
+      $this->HandleError("Database login failed!");
+      return false;
+    }
+    $sql = "SELECT * FROM shop_list_cats";
+    $result = mysql_query($sql, $this->connection) or die(mysql_error());
+    return $result;
+  }
+
+  function GetListItems()
+  {
+    if (!$this->DBLogin())
+    {
+      $this->HandleError("Database login failed!");
+      return false;
+    }
+    $sql = "SELECT * FROM shop_list ORDER BY category ASC";
+    $result = mysql_query($sql, $this->connection) or die(mysql_error());
+    return $result;
+  }
+
+  function UpdateShoppingList($item, $mode)
+  {
+    if (!$this->DBLogin())
+    {
+      $this->handleError("Database login failed!");
+      return false;
+    }
+    $sql = "UPDATE shop_list SET retrieved='" . $mode . "' WHERE item_name='" . $item . "'";
+    $result = mysql_query($sql, $this->connection) or die(mysql_error());
+    return $result;
+  }
+
+  function DelListItem($item)
+  {
+    if (!$this->DBLogin())
+    {
+      $this->HandleError("Database login failed!");
+      return false;
+    }
+    $sql = "DELETE FROM shop_list WHERE item_name='" . $item . "'";
+    $result = mysql_query($sql, $this->connection) or die(mysql_error());
+    return $result;
+  }
+
+  function AddShoppingItem($quantity, $item, $category)
+  {
+    if (!$this->DBLogin())
+    {
+      $this->HandleError("Database login failed!");
+      return false;
+    }
+    $quantityF = "'" . $quantity . "', ";
+    $itemF = "'" . $item . "', ";
+    $categoryF = "'" . $category . "', ";
+
+    $sql = "INSERT INTO shop_list (item_name, item_quant, category, retrieved) VALUES (" . $itemF . $quantityF . $categoryF . "'n')";
+    $result = mysql_query($sql, $this->connection) or die(mysql_error());
+    return $result;
+  }
 }
 ?>

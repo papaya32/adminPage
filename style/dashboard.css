@@ -26,13 +26,15 @@ h1T{
 h1{
     font-family: "Open Sans", arial;
     font-weight:300;
-    float: left;
+//    float: left;
 //    width: 55%;
-    margin-left: 5px;
+//    margin-left: 5px;
     font-size: 40px;
-    margin-bottom: 40px;
+//    margin-bottom: 40px;
 }
 h2{
+    color: white;
+    text-decoration: none;
     margin:0px;
     font-family: "Open Sans", arial;
     font-weight:300;
@@ -50,6 +52,13 @@ h2R{
 //    margin-top: 20px;
   margin-left:10px;
     -webkit-transform:scale(0.9);
+}
+.containerBot{
+  position: absolute;
+  right: 0;
+  bottom:0;
+  left: 0;
+  padding: 1rem;
 }
 a.wide, a.box{
     text-decoration:none;
@@ -203,5 +212,31 @@ img.prof{
 .buttonGreen:hover {
     background-color: #4CAF50;
     color: white;
+}
+
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.buttonBlue {
+    background-color: white;
+    color: #1E90FF;
+    border: 2px solid #1E90FF;
+    text-decoration: none;
+    margin: 4px 2px;
+    padding: 8px;
+    font-size: 18px;
 }
 

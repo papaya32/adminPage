@@ -4,6 +4,6 @@ AuthType Basic
 AuthName "restricted"
 AuthUserFile /var/www/.htpasswd
 
-<FilesMatch "^(manager.php)$">
+<FilesMatch "^(manager|managerSubmit)\.php$">
   Require user admin
 </FilesMatch>

@@ -4,6 +4,7 @@ $people = array(
 ,"Harrison"=>"battery-icon.png"
 ,"Jack"=>"wifi-icon.svg"
 ,"Bryce"=>"whale-icon.png"
+,"testUser"=>"new-user.png"
 //ADDUSERARRAY
 );
 
@@ -11,6 +12,7 @@ $drinks = array(
 "Heineken"=>"heineken-icon.png"
 ,"Miller Lite"=>"miller-icon.png"
 ,"Coke"=>"coke-icon.png"
+,"testDrink"=>"drink-icon.png"
 //ADDDRINKARRAY
 );
 
@@ -18,6 +20,7 @@ $price = array(
 "Heineken"=>"1.09"
 ,"Miller Lite"=>"0.96"
 ,"Coke"=>"0.48"
+,"testDrink"=>"1.00"
 //ADDPRICEARRAY
 );
 $imgVar1 = "<img src='../assets/";
@@ -33,7 +36,7 @@ $imgVar2 = "' width='115' height='115' border='0'/>";
 <div class="container">
   <a href='manager.php'><h1T>411 Bar Tab Dashboard</h1T></a>
   <div class="right">
-    <h2>906 Rose St</h2>
+    <a href="../shopList/shopList.php"><h2>906 Rose St.</h2></a>
   </div>
   <div class='spacer'>
     <a href="javascript:name('Bryce')" class='box blue'>
@@ -49,6 +52,7 @@ $imgVar2 = "' width='115' height='115' border='0'/>";
       <h2>Harrison</h2>
     </a>
 <?php
+$user = "testUser"; echo '<a href="javascript:name(' . "'" . $user . "'" . ')" class="box blue">'; echo $imgVar1 . $people[$user] . $imgVar2; echo '<h2>' . $user . '</h2></a>';
 //ADDUSERHERE
 ?>
   </div>
@@ -72,14 +76,15 @@ $imgVar2 = "' width='115' height='115' border='0'/>";
       echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>';
     echo '</a>';?>
 <?php
+$drink = testDrink; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
 //ADDDRINKHERE
 ?>
   </div>
 </div>
-<div id='container'>
-  <h1>&emsp;</h1><h1 id='name' style='display:none'></h1><h1 style='display:none' id='filler1'>&nbsp;drank a&nbsp;</h1><h1 style='display:none' id='drink'></h1><h1 style='display:none' id='filler2'>&nbsp; for $</h1><h1 style='display:none' id='price'></h1><h1 id='test'>&nbsp;</h1>
-  <button class='buttonGreen' onclick='drinkSubmit()' id='drinkSubmit' style='display:none'>Submit</button>
-</div>
-<div class='container'>
+<div class='containerBot'>
+  <br></br><br></br>
+  <h1>&emsp;</h1><h1 id='name' style='display:none'></h1><h1 style='display:none' id='filler1'>&nbsp;drank a&nbsp;</h1><h1 style='display:none' id='drink'></h1><h1 style='display:none' id='filler2'>&nbsp; for $</h1><h1 style='display:none' id='price'></h1><!-- <h1 id='test'>&nbsp;</h1> -->
+  <button class='buttonGreen' onclick='drinkSubmit()' id='drinkSubmit' style='display:none; float: right;'>Submit</button>
+<br>
   <footer id="papFoot"></footer>
 </div>

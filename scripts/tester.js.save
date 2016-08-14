@@ -154,15 +154,15 @@ function barManSubmit(mode)
 function crossItem(item)
 {
   console.log("Crossing off: " + item);
-  var crossStatus = document.getElementById(item).className;
+  var crossStatus = document.getElementById(item).style.textDecoration;
   if (crossStatus == "")
   {
-    document.getElementById(item).className = "strike";
+    document.getElementById(item).style.textDecoration = "line-through";
     retrieved(item, "y");
   }
   else
   {
-    document.getElementById(item).className = "";
+    document.getElementById(item).style.textDecoration = "";
     retrieved(item, "n");
   }
 }
@@ -184,19 +184,9 @@ function delListItem(item)
   request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   request.send(str);
   console.log("Deleting: " + item);
-  setTimeout(function () { location.reload(true); }, 1200);
+  setTimeout(function () { location.reload(true); }, 2000);
 }
 
 function itemSubmit()
 {
-  var quantity = document.getElementById("itemQuantity").value;
-  var name = document.getElementById("itemName").value;
-  var category = document.getElementById("selectCategory").value;
-
-  var request = new XMLHttpRequest();
-  var str = "mode=new" + "&quant=" + quantity + "&name=" + name + "&category=" + category;
-  request.open("POST", "shopListUpdate.php", true);
-  request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  request.send(str);
-  setTimeout(function () { location.reload(true); }, 1000);
-}
+  var item = getElementById
