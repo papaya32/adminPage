@@ -6,7 +6,6 @@ $db = array(
     "16" => "022", /*Coffee Controller*/
     "14" => "004", /*Bed Light*/
     "13" => "002", /*Desk Lights*/
-    "12" => "000", /*Standard Wall Light Dimmer Switch*/
     "18:FE:AA:AA:AA:BB" => "TEMP-1.0.0"
 );
 
@@ -50,7 +49,7 @@ function logger($message) {
     //file_put_contents($file, $current, FILE_APPEND);
 }
 
-if(!check_header('HTTP_USER_AGENT', 'ESP8266-http-Update')) {
+/*if(!check_header('HTTP_USER_AGENT', 'ESP8266-http-Update')) {
     header($_SERVER["SERVER_PROTOCOL"].' 403 Forbidden', true, 403);
     echo "only for ESP8266 updater!\n";
     logger("CUNT!");
@@ -91,6 +90,11 @@ logger($dat);
     }
     exit();
 //}
+*/
+	$filename = "/var/www/html/downTest/bin/14.bin";
+        logger("MADE IT HERE, filename: " . $filename);
+        sendFile($filename);
+	echo "good";
 
 header($_SERVER["SERVER_PROTOCOL"].' 500 no version for ESP MAC', true, 500);
 
