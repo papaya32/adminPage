@@ -10,7 +10,8 @@ if (!$fgmembersite->CheckLogin())
 $source = $_POST['source'];
 $target = $_POST['target'];
 $detail = $_POST['detail'];
-$type = $_POST['type'];
+$typeS = $_POST['typeS'];
+$typeT = $_POST['typeT'];
 
-$fgmembersite->SubmitRule($source, $target, $detail, $type);
+$fgmembersite->SubmitRule($source, $target, $detail, $typeS, $typeT);
 ?>

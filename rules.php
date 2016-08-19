@@ -35,8 +35,35 @@ $action = array(
   <h2>Your rules
   <button class="button buttonGreen" onclick="addRule()">Add Rule</button>
   </h2>
-
   <h2 style="display:none" id="noRules">No Rules Yet!</h2>
+<?php
+$result = $fgmembersite->GetRules();
+$deleteButt1 = '<td><button onclick="deleteRules(';
+$deleteButt2 = ');"><img src="assets/trash-icon.png" width="20" height="20" border="0"/></button></td>';
+
+if (($result == false) || (mysql_num_rows($result) == 0))
+{
+  echo "<script>document.getElementById('noRules').style.display = 'initial'</script>";
+}
+else
+{
+echo '<table class="dataTable">' . "\r\n";
+while ($row = mysql_fetch_assoc($result))
+{
+  $resultT = $fgmembersite->GetDevices($row['target']);
+  $resultS = $fgmembersite->GetDevices($row['source']);
+  $rowT = mysql_fetch_assoc($resultT);
+  $rowS = mysql_fetch_assoc($resultS);
+  $phraseS = array_search(substr($row["detail"], 0, 3), $event[$row['typeS']]);
+  $phraseT = array_search(substr($row["detail"], 3, 6), $action[$row['typeT']]);
+//  echo "<h3>" . $phraseS . "</h3>";
+  echo '<tr>' . $deleteButt1 . "'" . $row["id"] . "'" . $deleteButt2;
+  echo '<td>' . $action[$row['typeT']][$phraseT - 1] . '</td><td>' . $rowT['name'] . "</td><td>when</td>";
+  echo "<td>" . $event[$row['typeS']][$phraseS - 1] . "</td><td>on</td><td>" . $rowS['name'] . "</td></tr>";
+}
+echo "</table>";
+}
+?>
 
   <script>
   function addRule()
@@ -47,14 +74,14 @@ $action = array(
   }
   </script>
 
-  <div>
+   <div>
     <p style="font-size: 18px; display: none;" id="selectTitles">When <select onchange="deviceName()" style="display:none" id="deviceName"><option disabled selected value>-- Device --</option></p>
 <?php
 $result = $fgmembersite->GetDevices();
 
 while ($row = mysql_fetch_assoc($result))
 {
-  echo "<option value='" . $row['type_num'] . "' id='" . $row['serial_num'] . "'>" . $row['name'] . "</option>\r\n";
+  echo "<option value='" . $row['type_num'] . "' id='" . $row['serial_num'] . "'>" . $row['name'] . " (" . $row['location'] . ")" . "</option>\r\n";
 }
 ?>
     </select>
@@ -80,7 +107,7 @@ $result = $fgmembersite->GetDevices();
 
 while ($row = mysql_fetch_assoc($result))
 {
-  echo "<option value='" . $row['type_num'] . "' id='" . $row['serial_num'] . "'>" . $row['name'] . "</option>\r\n";
+  echo "<option value='" . $row['type_num'] . "' id='" . $row['serial_num'] . "'>" . $row['name'] . " (" . $row['location'] . ")" . "</option>\r\n";
 }
 ?>
 </select>
@@ -102,6 +129,24 @@ foreach ($types as &$value)
   <button id="submitButton" class="button" style="display:none; background-color: green;" onclick="submit()">Submit</button>
   <button id="clearButton" class="button" style="display:none; background-color: #f44336;" onclick="clearRules()">Clear</button>
   </div>
+
+<div id="deleteModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close">X</span>
+      <h2>Confirm Delete</h2>
+    </div>
+    <div class="modal-body">
+      <p>Click the button below to confirm deletion.</p>
+    </div>
+    <div class="modal-footer">
+      <h3><button onclick=confirmDelRule() class='buttonRed'>Confirm</button></h3>
+    </div>
+  </div>
+
+</div>
 
   <footer id="papFoot"></footer>
   <script src="../scripts/rules.js"></script>

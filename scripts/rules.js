@@ -20,6 +20,10 @@ var typeS;
 var temp1;
 var temp2;
 var temp3;
+var delId;
+
+var modal = document.getElementById("deleteModal");
+var span = document.getElementsByClassName("close")[0];
 
 function deviceName()
 {
@@ -28,6 +32,7 @@ function deviceName()
   source = options[options.selectedIndex].id;
 
   var eventSelect = typeS + "event";
+  console.log("eventselect: " + eventSelect);
   document.getElementById(eventSelect).style.display = "initial";
 }
 
@@ -80,16 +85,47 @@ function addRule()
 
 function submit()
 {
-  str = "source=" + source + "&target=" + target + "&detail=" + detail1 + detail2 + "&type=" + type;
+  str = "source=" + source + "&target=" + target + "&detail=" + detail1 + detail2 + "&typeT=" + type + "&typeS=" + typeS;
+  console.log("STR: " + str);
   var request = new XMLHttpRequest();
   request.open("POST", "ruleSubmit.php", true);
   request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   request.send(str);
-  location.reload();
+  setTimeout(function() { location.reload();}, 400);
 
   console.log("Source: " + source);
   console.log("Target: " + target);
   console.log("Detail1: " + detail1);
   console.log("Detail2: " + detail2);
   console.log("Type: " + type);
+}
+
+function deleteRules(id)
+{
+  modal.style.display = "block";
+  delId = id;
+}
+
+window.onclick = function(event)
+{
+  if (event.target == modal)
+  {
+    modal.style.display = "none";
+  }
+}
+
+function confirmDelRule()
+{
+  console.log("Confirmed: " + delId);
+  str = "id=" + delId;
+  var request = new XMLHttpRequest();
+  request.open("POST", "ruleDelete.php", true);
+  request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  request.send(str);
+  setTimeout(function () { location.reload();}, 400);
+}
+
+span.onclick = function()
+{
+  modal.style.display = "none";
 }

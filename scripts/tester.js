@@ -19,10 +19,15 @@ var btn = document.getElementById("myBtn");
 var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks the button, open the modal
-btn.onclick = function() {
+/*btn.onclick = function() {
     modal.style.display = "block";
     var serial = btn.value;
     deleteButt(serial);
+}*/
+
+span.onclick = function()
+{
+  modal.style.display = "none";
 }
 
 function closeModal()
@@ -79,7 +84,7 @@ function confirmDelDev()
   request.open("POST", "confirmRemove.php", true);
   request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   request.send(str);
-  location.reload();
+  setTimeout(function() { location.reload();}, 400);
 }  
 function confirmDelLoc()
 {
@@ -88,7 +93,7 @@ function confirmDelLoc()
   request.open("POST", "removeLocation.php", true);
   request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   request.send(str);
-  location.reload();
+  setTimeout(function() { location.reload();}, 400);
 }  
 var nameValue;
 var drinkValue;

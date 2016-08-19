@@ -106,7 +106,7 @@ while ($row = mysql_fetch_assoc($result))
 
   if (($result != false) && (mysql_num_rows($result) > 0))
   {
-    echo '<table class="dataTable" style="width: 75%">' . "\r\n" . '  <tr id="dataTableRow">' . "\r\n";
+    echo '<table class="dataTable" style="width: 75%;">' . "\r\n" . '  <tr id="dataTableRow">' . "\r\n";
     echo '<td class="delete"/><td><b>Name</b></td><td><b>Location</b></td><td><b>Serial Number</b></td><td><b>Type Num</b></td></tr><tr>';
     while ($row = mysql_fetch_assoc($result))
     {
@@ -125,6 +125,8 @@ while ($row = mysql_fetch_assoc($result))
     echo '<script>' . 'noDevices();' . '</script>';
   }
 ?>
+  <footer id="papFoot"></footer>
+  </div>
 <div id="myModal" class="modal">
 
   <!-- Modal content -->
@@ -144,8 +146,6 @@ while ($row = mysql_fetch_assoc($result))
 </div>
 
 
-  <footer id="papFoot"></footer>
-  </div>
 
 <script src="scripts/tester.js"></script>
 

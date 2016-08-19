@@ -62,7 +62,7 @@ ul#menu li a:hover {
 .dataTable {
     padding: 15px;
     border: 1px solid grey;
-    width: 75%;
+//    width: 75%;
 }
 .delete {
     padding: 0px;

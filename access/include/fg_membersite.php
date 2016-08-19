@@ -1008,16 +1008,23 @@ http://www.html-form-guide.com/php-form/php-login-form.html */ require_once("cla
       return $result;
     }
 
-    function GetDevices()
+    function GetDevices($serial = NULL)
     {
       $user_name = $this->UserUserName();
       $user_nameF = "'" . $user_name . "'";
 
-      $sql = "SELECT * FROM devices WHERE user_name=" . $user_nameF;
       if (!$this->DBLogin())
       {
         $this->HandleError("Database login failed!");
         return false;
+      }
+      if (is_null($serial))
+      {
+        $sql = "SELECT * FROM devices WHERE user_name=" . $user_nameF;
+      }
+      else
+      {
+        $sql = "SELECT * FROM devices WHERE user_name=" . $user_nameF . " AND serial_num='" . $serial . "'";
       }
       $result = mysql_query($sql, $this->connection) or die(mysql_error());
       return $result;
@@ -1180,29 +1187,56 @@ http://www.html-form-guide.com/php-form/php-login-form.html */ require_once("cla
     $result = mysql_query($sql, $this->connection) or die(mysql_error());
     return $result;
   }
-  function SubmitRule($source, $target, $detail, $type)
+  function SubmitRule($source, $target, $detail, $typeS, $typeT)
   {
     if (!$this->DBLogin())
     {
       $this->HandleError("Database login failed!");
       return false;
     }
-    $type = "0" . $type;
     $user_name = $this->UserUserName();
     $user_nameF = "'" . $user_name . "'";
     $sourceF = "'" . $source . "',";
     $targetF = "'" . $target . "',";
     $detailF = "'" . $detail . "',";
-    $typeF = "'" . $type . "',";
+    $typeSF = "'" . $typeS . "',";
+    $typeTF = "'" . $typeT . "',";
     $sql1 = "SELECT * FROM devices WHERE user_name=" . $user_nameF . " AND serial_num=" . "'" . $source . "'";
     $sql2 = "SELECT * FROM devices WHERE user_name=" . $user_nameF . " AND serial_num=" . "'" . $target . "'";
     $result1 = mysql_query($sql1, $this->connection) or die(mysql_error());
     $result2 = mysql_query($sql2, $this->connection) or die(mysql_error());
     if ((mysql_num_rows($result1) > 0) && (mysql_num_rows($result2) > 0))
     {
-      $sql = "INSERT INTO rules (source, target, detail, type, active, user_name) VALUES (" . $sourceF . $targetF . $detailF . $typeF . "'y'," . $user_nameF . ")";
+      $sql = "INSERT INTO rules (source, target, detail, typeS, typeT, active, user_name) VALUES (" . $sourceF . $targetF . $detailF . $typeSF . $typeTF . "'y'," . $user_nameF . ")";
+      error_log("Final sql: " . $sql);
       $result = mysql_query($sql, $this->connection) or die(mysql_error());
     }
+  }
+
+  function GetRules()
+  {
+    if (!$this->DBLogin())
+    {
+      $this->HandleError("Database login failed!");
+      return false;
+    }
+    $user_name = $this->UserUserName();
+    $sql = "SELECT * FROM rules WHERE user_name='" . $user_name . "'";
+    $result = mysql_query($sql, $this->connection) or die(mysql_error());
+    return $result;
+  }
+
+  function DeleteRule($id)
+  {
+    if (!$this->DBLogin())
+    {
+      $this->HandleError("Database login failed!");
+      return false;
+    }
+    $user_name = $this->UserUserName();
+    $user_nameF = "'" . $user_name . "'";
+    $sql = "DELETE FROM rules WHERE id=" . $id . " AND user_name=" . $user_nameF;
+    mysql_query($sql, $this->connection) or die(mysql_error());
   }
 }
 ?>
