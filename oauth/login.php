@@ -1,12 +1,58 @@
-<?PHP
+<?php
+session_start();
 require_once("/home/papaya/.access/membersite_config.php");
+
+if (isset($_GET["state"])) { $_SESSION["state"] = $_GET["state"]; }
+if (isset($_GET["scope"])) { $_SESSION["scope"] = $_GET["scope"]; }
+if (isset($_GET["client_id"])) { $_SESSION["client_id"] = $_GET["client_id"]; }
+if (isset($_GET["response_type"])) { $_SESSION["response_type"] = $_GET["response_type"]; }
+
+?>
+
+<?php
+function curl_get($url)
+{
+  $ch = curl_init();
+  curl_setopt($ch, CURLOPT_URL, $url);
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+  $data = curl_exec($ch);
+  curl_close($ch);
+  return $data;
+}
 
 if(isset($_POST['submitted']))
 {
-   if($fgmembersite->Login())
-   {
-        $fgmembersite->RedirectToURL("../tester.php");
-   }
+  if($fgmembersite->Login())
+  {
+    $args = array(
+      'state' => urlencode($_SESSION["state"]),
+      'scope' => urlencode($_SESSION["scope"]),
+      'client_id' => urlencode($_SESSION["client_id"]),
+      'response_type' => urlencode($_SESSION["response_type"]),
+      'user_id' => urlencode($fgmembersite->UserUserName())
+    );
+    foreach($args as $key=>$value) { $fields_string .= $key . '=' . $value . '&'; }
+    rtrim($fields_string, '&');
+
+    $fgmembersite->RedirectToURL("authorize.php?$fields_string");
+
+    $ch = curl_init();
+
+    curl_setopt($ch, CURLOPT_URL, "authorize.php");
+    curl_setopt($ch, CURLOPT_GET, count($fields));
+    curl_setopt($ch, CURLOPT_GETFIELDS, $fields_string);
+
+//    $result = curl_exec($ch);
+
+    curl_close($ch);
+    
+
+//    $str = "https://$authURL?state=" . $_SESSION["state"] . "&code=$token";
+//    $str = "tester.php?state=" . $_SESSION["state"] . "&code=$token";
+//    $request = curl_get($str);
+    error_log("STRING: " . $str);
+    $fgmembersite->RedirectToURL("https://" . $authURL);
+  }
 }
 
 ?>
@@ -44,7 +90,7 @@ if(isset($_POST['submitted']))
 
 <div class='container'>
     <input class='buttonGreen' value='Login' type='submit' name='Submit' />
-    <a class="buttonGreen" href="register.php">Register</a>
+    <a class="buttonGreen" href="../access/register.php?action=authorize">Register</a>
 </div>
 <br>
 <div class='short_explanation'><a href='reset-pwd-req.php'>Forgot Password?</a></div>

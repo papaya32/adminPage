@@ -27,38 +27,29 @@ if(!$fgmembersite->CheckLogin())
 
   <h2 style="display:none" id="noDevices">No Devices Yet!</h2>
 
-  <b><table style="display:none" id="addTitles" class="blank_table">
-    <tr>
-      <td id="title">Name</td>
-      <td id="title">Location</td>
-      <td id="title">Serial Number</td>
-      <td id="title">Type Number</td>
-    </tr>
-  </table></b>
-  <b><table style="display:none" id="removeTitles" class="blank_table">
-    <tr>
-      <td id="title">Serial Number</td>
-    </tr>
-  </table></b>
-
   <form style="display:none" id="addDevice" action="confirmAdd.php" method="post">
+    <b><label class="labelText" for="addName">Name</label></b>
     <input type="text" class="textbox" name="addName">
+    <b><label class="labelText" for="addLocation">Location</label></b>
     <select name="addLocation" class="textbox">
 <?php
 $result = $fgmembersite->GetLocations();
 
-while ($row = mysql_fetch_assoc($result))
+while ($row = mysqli_fetch_assoc($result))
   {
     echo "<option value='" . $row['location_name'] . "'>" . $row['location_name'] . "</option>";
   }
 ?>
   </select>
+    <b><label class="labelText" for="addSerial">Serial Number</label></b>
     <input type="text" class="textbox" name="addSerial">
+    <b><label class="labelText" for="addType">Type Number</label></b>
     <input type="text" class="textbox" name="addType">
     <br>
     <input type="submit" class="button" value="Submit">
   </form>
   <form style="display:none" id="removeDevice" action="confirmRemove.php" method="post">
+    <b><label class="labelText" for="removeSerial">Serial Number</label></b>
     <input type="text" class="textbox" name="removeSerial">
     <input type="submit" class="button" value="Submit">
   </form>
@@ -68,23 +59,18 @@ while ($row = mysql_fetch_assoc($result))
 
   <script>
   function clearDevices() {
-    document.getElementById("addTitles").style.display = "none";
-    document.getElementById("removeTitles").style.display = "none";
     document.getElementById("clearButton").style.display = "none";
     document.getElementById("addDevice").style.display = "none";
-//    document.getElementById("removeDevice").style.display = "none";
+    document.getElementById("removeDevice").style.display = "none";
     document.getElementById("noDevices").style.display = "none";
   }
   function addDevice() {
     clearDevices()
-    document.getElementById("addTitles").style.display = "table";
     document.getElementById("clearButton").style.display = "initial";
     document.getElementById("addDevice").style.display = "initial";
-//    document.getElementById("addLocation").style.display = "initial";
   }
   function removeDevice() {
     clearDevices()
-    document.getElementById("removeTitles").style.display = "table";
     document.getElementById("removeDevice").style.display = "initial";
     document.getElementById("clearButton").style.display = "initial";
   }
@@ -104,11 +90,11 @@ while ($row = mysql_fetch_assoc($result))
 
 //  echo "<button id='myBtn'>TESTER</button>";
 
-  if (($result != false) && (mysql_num_rows($result) > 0))
+  if (($result != false) && (mysqli_num_rows($result) > 0))
   {
     echo '<table class="dataTable" style="width: 75%;">' . "\r\n" . '  <tr id="dataTableRow">' . "\r\n";
     echo '<td class="delete"/><td><b>Name</b></td><td><b>Location</b></td><td><b>Serial Number</b></td><td><b>Type Num</b></td></tr><tr>';
-    while ($row = mysql_fetch_assoc($result))
+    while ($row = mysqli_fetch_assoc($result))
     {
       echo $deleteButt1 . "'" . $row["serial_num"] . "'" . $deleteButt2;
 //      echo $deleteButt1 . $deleteButt2;

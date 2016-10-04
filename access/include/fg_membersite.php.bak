@@ -117,8 +117,6 @@ http://www.html-form-guide.com/php-form/php-login-form.html */ require_once("cla
         
         $username = trim($_POST['username']);
         $password = trim($_POST['password']);
-
-        error_log("USERNAME: " . $username);
         
         if(!isset($_SESSION)){ session_start(); }
         if(!$this->CheckLoginInDB($username,$password))
@@ -133,7 +131,7 @@ http://www.html-form-guide.com/php-form/php-login-form.html */ require_once("cla
             //return true;
 	//}
 	//$_SESSION['num_login'] = $_SESSION['num_login'] + 1;
-	//$num_login = mysqli_query("UPDATE $this->tablename SET num_login=$_SESSION['num_login'] WHERE username = '$username'", $this->connection) or die(mysqli_error());
+	//$num_login = mysql_query("UPDATE $this->tablename SET num_login=$_SESSION['num_login'] WHERE username = '$username'", $this->connection) or die(mysql_error());
 	//TODO DEBUG THIS
         return true;
     }
@@ -342,7 +340,7 @@ http://www.html-form-guide.com/php-form/php-login-form.html */ require_once("cla
     
     function HandleDBError($err)
     {
-        $this->HandleError($err."\r\n mysqlierror:".mysqli_error());
+        $this->HandleError($err."\r\n mysqlerror:".mysql_error());
     }
     
     function GetFromAddress()
@@ -371,11 +369,11 @@ http://www.html-form-guide.com/php-form/php-login-form.html */ require_once("cla
             return false;
         }          
         $username = $this->SanitizeForSQL($username);
-  	$nresult = mysqli_query($this->connection, "SELECT * FROM $this->tablename WHERE username = '$username'") or die(mysqli_error());
+  	$nresult = mysql_query("SELECT * FROM $this->tablename WHERE username = '$username'", $this->connection) or die(mysql_error());
         // check for result
-        $no_of_rows = mysqli_num_rows($nresult);
+        $no_of_rows = mysql_num_rows($nresult);
         if ($no_of_rows > 0) {
-            $nresult = mysqli_fetch_array($nresult);
+            $nresult = mysql_fetch_array($nresult);
             $salt = $nresult['salt'];
             $encrypted_password = $nresult['password'];
             $hash = $this->checkhashSSHA($salt, $password);
@@ -383,17 +381,16 @@ http://www.html-form-guide.com/php-form/php-login-form.html */ require_once("cla
            
         }
         $qry = "Select name, email, username, num_login, user_token from $this->tablename where username='$username' and password='$hash' and confirmcode='y'";
-        error_log("QUERY: " . $qry);
         
-        $result = mysqli_query($this->connection, $qry);
+        $result = mysql_query($qry,$this->connection);
         
-        if(!$result || mysqli_num_rows($result) <= 0)
+        if(!$result || mysql_num_rows($result) <= 0)
         {
             $this->HandleError("Error logging in. The username or password does not match");
             return false;
         }
         
-        $row = mysqli_fetch_assoc($result);
+        $row = mysql_fetch_assoc($result);
         
         
         $_SESSION['name_of_user'] = $row['name'];
@@ -420,19 +417,19 @@ http://www.html-form-guide.com/php-form/php-login-form.html */ require_once("cla
         }   
         $confirmcode = $this->SanitizeForSQL($_GET['code']);
         
-        $result = mysqli_query($this->connection, "Select name, email from $this->tablename where confirmcode='$confirmcode'");
-        if(!$result || mysqli_num_rows($result) <= 0)
+        $result = mysql_query("Select name, email from $this->tablename where confirmcode='$confirmcode'",$this->connection);
+        if(!$result || mysql_num_rows($result) <= 0)
         {
             $this->HandleError("Wrong confirm code.");
             return false;
         }
-        $row = mysqli_fetch_assoc($result);
+        $row = mysql_fetch_assoc($result);
         $user_rec['name'] = $row['name'];
         $user_rec['email']= $row['email'];
         
         $qry = "Update $this->tablename Set confirmcode='y' Where confirmcode='$confirmcode'";
         
-        if(!mysqli_query($this->connection, $qry))
+        if(!mysql_query( $qry ,$this->connection))
         {
             $this->HandleDBError("Error inserting data to the table\nquery:$qry");
             return false;
@@ -460,7 +457,7 @@ http://www.html-form-guide.com/php-form/php-login-form.html */ require_once("cla
         
         $qry = "Update $this->tablename Set password='".$new_password."', salt='".$salt."' Where id_user=".$user_rec['id_user']."";
         
-        if(!mysqli_query( $this->connection, $qry))
+        if(!mysql_query( $qry ,$this->connection))
         {
             $this->HandleDBError("Error updating the password \nquery:$qry");
             return false;
@@ -477,13 +474,13 @@ http://www.html-form-guide.com/php-form/php-login-form.html */ require_once("cla
         }   
         $email = $this->SanitizeForSQL($email);
         
-        $result = mysqli_query($this->connection, "Select * from $this->tablename where email='$email'");
-        if(!$result || mysqli_num_rows($result) <= 0)
+        $result = mysql_query("Select * from $this->tablename where email='$email'",$this->connection);
+        if(!$result || mysql_num_rows($result) <= 0)
         {
             $this->HandleError("There is no user with email: $email");
             return false;
         }
-        $user_rec = mysqli_fetch_assoc($result);
+        $user_rec = mysql_fetch_assoc($result);
         
         return true;
     }
@@ -758,8 +755,8 @@ http://www.html-form-guide.com/php-form/php-login-form.html */ require_once("cla
     {
         $field_val = $this->SanitizeForSQL($formvars[$fieldname]);
         $qry = "select username from $this->tablename where $fieldname='".$field_val."'";
-        $result = mysqli_query($this->connection, $qry);
-        if($result && mysqli_num_rows($result) > 0)
+        $result = mysql_query($qry,$this->connection);
+        if($result && mysql_num_rows($result) > 0)
         {
             return false;
         }
@@ -768,29 +765,29 @@ http://www.html-form-guide.com/php-form/php-login-form.html */ require_once("cla
     
     function DBLogin()
     {
-        $this->connection = mysqli_connect($this->db_host,$this->username,$this->pwd, $this->database);
+        $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
         if(!$this->connection)
         {
             $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
             return false;
         }
-/*        if(!mysqli_select_db($this->connection, $this->database))
+        if(!mysql_select_db($this->database, $this->connection))
         {
             $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
             return false;
         }
-        if(!mysqli_query("SET NAMES 'UTF8'",$this->connection))
+        if(!mysql_query("SET NAMES 'UTF8'",$this->connection))
         {
             $this->HandleDBError('Error setting utf8 encoding');
             return false;
-        } */
+        }
         return true;
     }    
     
     function Ensuretable()
     {
-        $result = mysqli_query($this->connection, "SHOW COLUMNS FROM $this->tablename");
-        if(!$result || mysqli_num_rows($result) <= 0)
+        $result = mysql_query("SHOW COLUMNS FROM $this->tablename");
+        if(!$result || mysql_num_rows($result) <= 0)
         {
             return $this->CreateTable();
         }
@@ -815,7 +812,7 @@ http://www.html-form-guide.com/php-form/php-login-form.html */ require_once("cla
                 ")"; //TODO DEBUG THIS
 	
                 
-        if(!mysqli_query($this->connection, $qry))
+        if(!mysql_query($qry,$this->connection))
         {
             $this->HandleDBError("Error creating the table \nquery was\n $qry");
             return false;
@@ -859,7 +856,7 @@ http://www.html-form-guide.com/php-form/php-login-form.html */ require_once("cla
 		)';
 		//TODO DEBUG THIS^^
  
-        if(!mysqli_query( $this->connection, $insert_query))
+        if(!mysql_query( $insert_query ,$this->connection))
         {
             $this->HandleDBError("Error inserting data to the table\nquery:$insert_query");
             return false;
@@ -882,14 +879,9 @@ http://www.html-form-guide.com/php-form/php-login-form.html */ require_once("cla
     }
     function SanitizeForSQL($str)
     {
-        if(!$this->DBLogin())
+        if( function_exists( "mysql_real_escape_string" ) )
         {
-              $this->HandleError("Database Login failed");
-              return false;
-        }
-        if( function_exists( "mysqli_real_escape_string" ) )
-        {
-              $ret_str = mysqli_real_escape_string( $this->connection, $str );
+              $ret_str = mysql_real_escape_string( $str );
         }
         else
         {
@@ -948,11 +940,6 @@ http://www.html-form-guide.com/php-form/php-login-form.html */ require_once("cla
         $this->HandleError("Type field must be numeric and 2 numbers");
         return false;
       }
-      if (!$this->CheckSerial($serial))
-      {
-        $this->HandleError("This device has already been registered!");
-        return false;
-      }
       $nameF = "'" . $name . "',";
       $locationF = "'" . $location . "',";
       $serialF = "'" . $serial . "',";
@@ -967,7 +954,7 @@ http://www.html-form-guide.com/php-form/php-login-form.html */ require_once("cla
         $this->HandleError("Database login failed!");
         return false;
       }
-      $result = mysqli_query($this->connection, $sql) or die(mysqli_error());
+      $result = mysql_query($sql, $this->connection) or die(mysql_error());
       //$result = $sql;
       return $result;
     }
@@ -995,8 +982,8 @@ http://www.html-form-guide.com/php-form/php-login-form.html */ require_once("cla
         $this->HandleError("Database login failed!");
         return false;
       }
-      $result = mysqli_query($this->connection, $sql) or die(mysqli_error());
-//      $result = mysqli_query($this->connection, $sql) or die($sql);
+      $result = mysql_query($sql, $this->connection) or die(mysql_error());
+//      $result = mysql_query($sql, $this->connection) or die($sql);
       return $result;
     }
 
@@ -1011,7 +998,7 @@ http://www.html-form-guide.com/php-form/php-login-form.html */ require_once("cla
         $this->HandleError("Database login failed!");
         return false;
       }
-      $result = mysqli_query($this->connection, $sql) or die(mysqli_error());
+      $result = mysql_query($sql, $this->connection) or die(mysql_error());
       return $result;
     }
 
@@ -1027,27 +1014,8 @@ http://www.html-form-guide.com/php-form/php-login-form.html */ require_once("cla
         $this->HandleError("Database login failed!");
         return false;
       }
-      $result = mysqli_query($this->connection, $sql) or die(mysqli_error());
+      $result = mysql_query($sql, $this->connection) or die(mysql_error());
       return $result;
-    }
-
-    function CheckSerial($serial)
-    {
-      if (!$this->DBLogin())
-      {
-        $this->HandleError("Error logging in");
-        return false;
-      }
-//      $sql = $this->SanitizeForSQL("SELECT * FROM devices WHERE serial_num='$serial'");
-      $serial = $this->SanitizeForSQL($serial);
-      $sql = "SELECT * FROM devices WHERE serial_num='$serial'";
-
-      $result = mysqli_query($this->connection, $sql) or die(mysqli_error());
-      if (mysqli_num_rows($result) > 0)
-      {
-        return false;
-      }
-      return true;
     }
 
     function GetDevices($serial = NULL)
@@ -1066,9 +1034,9 @@ http://www.html-form-guide.com/php-form/php-login-form.html */ require_once("cla
       }
       else
       {
-        $sql = "SELECT * FROM devices WHERE user_name='$user_name' AND serial_num='$serial'";
+        $sql = "SELECT * FROM devices WHERE user_name=" . $user_nameF . " AND serial_num='" . $serial . "'";
       }
-      $result = mysqli_query($this->connection, $sql) or die(mysqli_error());
+      $result = mysql_query($sql, $this->connection) or die(mysql_error());
       return $result;
     }
 
@@ -1083,15 +1051,15 @@ http://www.html-form-guide.com/php-form/php-login-form.html */ require_once("cla
       {
         $fgmembersite->HandleError("Database login failed!");
       }
-      $result1 = mysqli_query($sql1, $fgmembersite->connection) or die(mysqli_error());
+      $result1 = mysql_query($sql1, $fgmembersite->connection) or die(mysql_error());
 
-      $row = mysqli_fetch_assoc($result1);
+      $row = mysql_fetch_assoc($result1);
 
       $tab = (float)$row["tab"];
       $newTab = (float)$price + $tab;
       $newTab = "'" . strval($newTab) . "'";
       $sql2 = "UPDATE barTab SET tab=" . strval($newTab) . " WHERE name=" . $nameF;
-      $result2 = mysqli_query($sql2, $fgmembersite->connection) or die(mysqli_error());
+      $result2 = mysql_query($sql2, $fgmembersite->connection) or die(mysql_error());
 */
 
 
@@ -1103,13 +1071,13 @@ http://www.html-form-guide.com/php-form/php-login-form.html */ require_once("cla
         $this->HandleError("Database login failed!");
         return false;
       }
-      $result1 = mysqli_query($this->connection, $sql1) or die(mysqli_error());
-      $row = mysqli_fetch_assoc($result1);
+      $result1 = mysql_query($sql1, $this->connection) or die(mysql_error());
+      $row = mysql_fetch_assoc($result1);
 
       $tab = (float)$row["tab"];
       $newTab = (float)$price + $tab;
       $sql2 = "UPDATE barTab SET tab=" . strval($newTab) . " WHERE name=" . $nameF;
-      $result2 = mysqli_query($this->connection, $sql2) or die(mysqli_error());
+      $result2 = mysql_query($sql2, $this->connection) or die(mysql_error());
 
       return $newTab;
     }
@@ -1122,7 +1090,7 @@ http://www.html-form-guide.com/php-form/php-login-form.html */ require_once("cla
       return false;
     }
     $sql = "SELECT * FROM barTab";
-    $result = mysqli_query($this->connection, $sql) or die(mysqli_error());
+    $result = mysql_query($sql, $this->connection) or die(mysql_error());
     return $result;
   }
 
@@ -1134,7 +1102,7 @@ http://www.html-form-guide.com/php-form/php-login-form.html */ require_once("cla
       return false;
     }
     $sql = "UPDATE barTab SET tab='0' WHERE name=" . "'" . $name . "'";
-    $result = mysqli_query($this->connection, $sql) or die(mysqli_error());
+    $result = mysql_query($sql, $this->connection) or die(mysql_error());
     return $result;
   }
 
@@ -1147,7 +1115,7 @@ http://www.html-form-guide.com/php-form/php-login-form.html */ require_once("cla
       return false;
     }
     $sql = "INSERT INTO barTab (name, tab) VALUES (" . $userF . ",'0')";
-    $result = mysqli_query($this->connection, $sql) or die(mysqli_error());
+    $result = mysql_query($sql, $this->connection) or die(mysql_error());
     $old_path = getcwd();
     chdir('/home/papaya/scripts/');
     $bashScript = "sudo ./addUser.sh " . $user;
@@ -1174,7 +1142,7 @@ http://www.html-form-guide.com/php-form/php-login-form.html */ require_once("cla
       return false;
     }
     $sql = "SELECT * FROM shop_list_cats";
-    $result = mysqli_query($this->connection, $sql) or die(mysqli_error());
+    $result = mysql_query($sql, $this->connection) or die(mysql_error());
     return $result;
   }
 
@@ -1186,7 +1154,7 @@ http://www.html-form-guide.com/php-form/php-login-form.html */ require_once("cla
       return false;
     }
     $sql = "SELECT * FROM shop_list ORDER BY category ASC";
-    $result = mysqli_query($this->connection, $sql) or die(mysqli_error());
+    $result = mysql_query($sql, $this->connection) or die(mysql_error());
     return $result;
   }
 
@@ -1198,7 +1166,7 @@ http://www.html-form-guide.com/php-form/php-login-form.html */ require_once("cla
       return false;
     }
     $sql = "UPDATE shop_list SET retrieved='" . $mode . "' WHERE item_name='" . $item . "'";
-    $result = mysqli_query($this->connection, $sql) or die(mysqli_error());
+    $result = mysql_query($sql, $this->connection) or die(mysql_error());
     return $result;
   }
 
@@ -1210,7 +1178,7 @@ http://www.html-form-guide.com/php-form/php-login-form.html */ require_once("cla
       return false;
     }
     $sql = "DELETE FROM shop_list WHERE item_name='" . $item . "'";
-    $result = mysqli_query($this->connection, $sql) or die(mysqli_error());
+    $result = mysql_query($sql, $this->connection) or die(mysql_error());
     return $result;
   }
 
@@ -1226,7 +1194,7 @@ http://www.html-form-guide.com/php-form/php-login-form.html */ require_once("cla
     $categoryF = "'" . $category . "', ";
 
     $sql = "INSERT INTO shop_list (item_name, item_quant, category, retrieved) VALUES (" . $itemF . $quantityF . $categoryF . "'n')";
-    $result = mysqli_query($this->connection, $sql) or die(mysqli_error());
+    $result = mysql_query($sql, $this->connection) or die(mysql_error());
     return $result;
   }
   function SubmitRule($source, $target, $detail, $typeS, $typeT)
@@ -1245,13 +1213,13 @@ http://www.html-form-guide.com/php-form/php-login-form.html */ require_once("cla
     $typeTF = "'" . $typeT . "',";
     $sql1 = "SELECT * FROM devices WHERE user_name=" . $user_nameF . " AND serial_num=" . "'" . $source . "'";
     $sql2 = "SELECT * FROM devices WHERE user_name=" . $user_nameF . " AND serial_num=" . "'" . $target . "'";
-    $result1 = mysqli_query($this->connection, $sql1) or die(mysqli_error());
-    $result2 = mysqli_query($this->connection, $sql2) or die(mysqli_error());
-    if ((mysqli_num_rows($result1) > 0) && (mysqli_num_rows($result2) > 0))
+    $result1 = mysql_query($sql1, $this->connection) or die(mysql_error());
+    $result2 = mysql_query($sql2, $this->connection) or die(mysql_error());
+    if ((mysql_num_rows($result1) > 0) && (mysql_num_rows($result2) > 0))
     {
       $sql = "INSERT INTO rules (source, target, detail, typeS, typeT, active, user_name) VALUES (" . $sourceF . $targetF . $detailF . $typeSF . $typeTF . "'y'," . $user_nameF . ")";
       error_log("Final sql: " . $sql);
-      $result = mysqli_query($this->connection, $sql) or die(mysqli_error());
+      $result = mysql_query($sql, $this->connection) or die(mysql_error());
     }
   }
 
@@ -1264,7 +1232,7 @@ http://www.html-form-guide.com/php-form/php-login-form.html */ require_once("cla
     }
     $user_name = $this->UserUserName();
     $sql = "SELECT * FROM rules WHERE user_name='" . $user_name . "'";
-    $result = mysqli_query($this->connection, $sql) or die(mysqli_error());
+    $result = mysql_query($sql, $this->connection) or die(mysql_error());
     return $result;
   }
 
@@ -1278,7 +1246,7 @@ http://www.html-form-guide.com/php-form/php-login-form.html */ require_once("cla
     $user_name = $this->UserUserName();
     $user_nameF = "'" . $user_name . "'";
     $sql = "DELETE FROM rules WHERE id=" . $id . " AND user_name=" . $user_nameF;
-    mysqli_query($this->connection, $sql) or die(mysqli_error());
+    mysql_query($sql, $this->connection) or die(mysql_error());
   }
 
   function SetAmazonRedirect($url)
@@ -1294,10 +1262,8 @@ http://www.html-form-guide.com/php-form/php-login-form.html */ require_once("cla
   function typeInit()
   {
     $this->TypeFunctions = array(
-//      "16" => array("turnOn", "turnOff"),
-      "13" => array("turnOn", "turnOff"),
-      "14" => array("turnOn", "turnOff"),
-      "12" => array("turnOn", "turnOff")
+      "16" => array("turnOn", "turnOff"),
+      "13" => array("turnOn", "turnOff")
     );
   }
 
@@ -1310,9 +1276,9 @@ http://www.html-form-guide.com/php-form/php-login-form.html */ require_once("cla
       return false;
     }
     $sql = "SELECT * FROM devices WHERE user_name='$username'";
-    $result = mysqli_query($this->connection, $sql) or die(mysqli_error());
+    $result = mysql_query($sql, $this->connection) or die(mysql_error());
 //    $devices[];
-    while ($row = mysqli_fetch_assoc($result))
+    while ($row = mysql_fetch_assoc($result))
     {
       $serial = $row["serial_num"];
       $type = $row["type_num"];
@@ -1324,29 +1290,14 @@ http://www.html-form-guide.com/php-form/php-login-form.html */ require_once("cla
         "applianceId" => $serial,
         "manufacturerName" => "Papayan Industries",
         "modelName" => $type,
-        "version" => "1.00",
         "friendlyName" => $row["name"],
         "friendlyDescription" => "Papayan Smart Home Device",
         "isReachable" => True,
         "actions" => $this->TypeFunctions[$type]
       );
     }
-//    $devices = json_encode($devices);
+    $devices = json_encode($devices);
     return $devices;
-  }
-
-  function CheckOwnership($username, $serial)
-  {
-    $serial = $this->SanitizeForSQL($serial);
-    $username = $this->SanitizeForSQL($username);
-
-    $sql = "SELECT * FROM devices WHERE serial_num='$serial' AND user_name='$username'";
-    $result = mysqli_query($this->connection, $sql) or die(mysqli_error());
-    if (mysqli_num_rows($result) > 0)
-    {
-      return $result;
-    }
-    return false;
   }
 }
 ?>

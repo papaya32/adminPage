@@ -84,19 +84,19 @@ $result = $fgmembersite->GetLocations();
 $deleteButt1 = '<td><button onclick="deleteLoc(';
 $deleteButt2 = ');"><img src="./assets/trash-icon.png" width="20" height="20" border="0"/></button>';
 
-if (($result != false) && (mysql_num_rows($result) > 0))
+if (($result != false) && (mysqli_num_rows($result) > 0))
 {
         echo '<table class="dataTable" style="width: 75%">' . "\r\n" . '  <tr id="dataTableRow">' . "\r\n";
         echo '<td class="delete"/><td><b>Location</b></td><td><b>Devices</b></td></tr>';
-        while ($row = mysql_fetch_assoc($result))
+        while ($row = mysqli_fetch_assoc($result))
         {
                 echo $deleteButt1 . "'" . $row["location_name"] . "'" . $deleteButt2 . "</td>";
 		echo "<td>" . $row["location_name"] . "</td>";
                 $resultD = $fgmembersite->GetDevicesInLocations($row["location_name"]);
 		$temp = 1;
-		if (mysql_num_rows($resultD) > 0)
+		if (mysqli_num_rows($resultD) > 0)
 		{
-                  while ($rowD = mysql_fetch_assoc($resultD))
+                  while ($rowD = mysqli_fetch_assoc($resultD))
                   {
                     if ($temp == 1)
                     {

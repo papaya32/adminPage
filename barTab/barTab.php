@@ -1,26 +1,23 @@
 <?php
 $people = array(
-"Alex"=>"caterpillar-icon.png"
-,"Harrison"=>"battery-icon.png"
-,"Jack"=>"wifi-icon.svg"
-,"Bryce"=>"whale-icon.png"
-,"testUser"=>"new-user.png"
+"Alex"=>"new-user.png"
+,"Harrison"=>"new-user.png"
+,"Jack"=>"new-user.png"
+,"Bryce"=>"new-user.png"
 //ADDUSERARRAY
 );
 
 $drinks = array(
-"Heineken"=>"heineken-icon.png"
-,"Miller Lite"=>"miller-icon.png"
-,"Coke"=>"coke-icon.png"
-,"testDrink"=>"drink-icon.png"
+//"Heineken"=>"heineken-icon.png"
+"Miller Lite"=>"miller-icon.png"
+,"Water"=>"drink-icon.png"
 //ADDDRINKARRAY
 );
 
 $price = array(
-"Heineken"=>"1.09"
-,"Miller Lite"=>"0.96"
-,"Coke"=>"0.48"
-,"testDrink"=>"1.00"
+//"Heineken"=>"1.09"
+"Miller Lite"=>"0.96"
+,"Water"=>"0.48"
 //ADDPRICEARRAY
 );
 $imgVar1 = "<img src='../assets/";
@@ -52,7 +49,6 @@ $imgVar2 = "' width='115' height='115' border='0'/>";
       <h2>Harrison</h2>
     </a>
 <?php
-$user = "testUser"; echo '<a href="javascript:name(' . "'" . $user . "'" . ')" class="box blue">'; echo $imgVar1 . $people[$user] . $imgVar2; echo '<h2>' . $user . '</h2></a>';
 //ADDUSERHERE
 ?>
   </div>
@@ -63,20 +59,13 @@ $user = "testUser"; echo '<a href="javascript:name(' . "'" . $user . "'" . ')" c
       echo $imgVar1 . $drinks["$drink"] . $imgVar2;
       echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>';
     echo '</a>';?>
-    <?php $drink = "Heineken";
+    <?php $drink = "Water";
     echo '
     <a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box lime">';
       echo $imgVar1 . $drinks["$drink"] . $imgVar2;
       echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>';
     echo '</a>';?>
-    <?php $drink = "Coke";
-    echo '
-    <a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">';
-      echo $imgVar1 . $drinks["$drink"] . $imgVar2;
-      echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>';
-    echo '</a>';?>
 <?php
-$drink = testDrink; echo '<a href="javascript:drink(\'' . $drink . '\', \'' . $price[$drink] . '\')" class="box bluefish">'; echo $imgVar1 . $drinks["$drink"] . $imgVar2; echo '<h2>' . $drink . '</h2>'; echo '<h2R>$' . $price["$drink"] . '</h2R>'; echo '</a>';
 //ADDDRINKHERE
 ?>
   </div>

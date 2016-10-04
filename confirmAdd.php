@@ -19,15 +19,17 @@ if(!$fgmembersite->CheckLogin())
 <body>
 
   <div id="main">
-  <h1 style="visibility:hidden" id="deviceConfirm">New Device Added!</h1>
-  <h1 style="visibility:hidden" id="deviceFail">Failed to Add Device!</h1>
-
+  <h1 id="deviceTitle"></h1>
 <script>
-  function deviceFail() {
-    document.getElementById("deviceFail").style.visibility = "visible";
-  }
-  function deviceConfirm() {
-    document.getElementById("deviceConfirm").style.visibility = "visible";
+  function deviceAdd(state) {
+    var message;
+    if (state) {
+      message = "Device Added!";
+    }
+    else {
+      message = "Failed To Add Device!";
+    }
+    document.getElementById("deviceTitle").innerHTML = message;
   }
 </script>
 <?php
@@ -39,7 +41,7 @@ $type = $_POST["addType"];
 $result = $fgmembersite->AddDevice($name, $location, $serial, $type);
 if ($result != false)
 {
-  echo "<script>deviceConfirm()</script>";
+  echo "<script>deviceAdd(true)</script>";
   echo'  <table class="blank_table">
     <tr>
       <td>Name</td>
@@ -58,7 +60,7 @@ if ($result != false)
 else
 {
   echo "<div><span class='error'>" . $fgmembersite->GetErrorMessage() . "</span></div>";
-  echo "<script>deviceFail()</script>";
+  echo "<script>deviceAdd(false)</script>";
 }
 ?>
   <br>

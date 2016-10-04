@@ -41,19 +41,19 @@ $result = $fgmembersite->GetRules();
 $deleteButt1 = '<td><button onclick="deleteRules(';
 $deleteButt2 = ');"><img src="assets/trash-icon.png" width="20" height="20" border="0"/></button></td>';
 
-if (($result == false) || (mysql_num_rows($result) == 0))
+if (($result == false) || (mysqli_num_rows($result) == 0))
 {
   echo "<script>document.getElementById('noRules').style.display = 'initial'</script>";
 }
 else
 {
 echo '<table class="dataTable">' . "\r\n";
-while ($row = mysql_fetch_assoc($result))
+while ($row = mysqli_fetch_assoc($result))
 {
   $resultT = $fgmembersite->GetDevices($row['target']);
   $resultS = $fgmembersite->GetDevices($row['source']);
-  $rowT = mysql_fetch_assoc($resultT);
-  $rowS = mysql_fetch_assoc($resultS);
+  $rowT = mysqli_fetch_assoc($resultT);
+  $rowS = mysqli_fetch_assoc($resultS);
   $phraseS = array_search(substr($row["detail"], 0, 3), $event[$row['typeS']]);
   $phraseT = array_search(substr($row["detail"], 3, 6), $action[$row['typeT']]);
 //  echo "<h3>" . $phraseS . "</h3>";
@@ -79,7 +79,7 @@ echo "</table>";
 <?php
 $result = $fgmembersite->GetDevices();
 
-while ($row = mysql_fetch_assoc($result))
+while ($row = mysqli_fetch_assoc($result))
 {
   echo "<option value='" . $row['type_num'] . "' id='" . $row['serial_num'] . "'>" . $row['name'] . " (" . $row['location'] . ")" . "</option>\r\n";
 }
@@ -105,7 +105,7 @@ foreach ($types as &$value)
 <?php
 $result = $fgmembersite->GetDevices();
 
-while ($row = mysql_fetch_assoc($result))
+while ($row = mysqli_fetch_assoc($result))
 {
   echo "<option value='" . $row['type_num'] . "' id='" . $row['serial_num'] . "'>" . $row['name'] . " (" . $row['location'] . ")" . "</option>\r\n";
 }
