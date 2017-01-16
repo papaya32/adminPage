@@ -6,7 +6,7 @@ require_once("/home/papaya/.access/membersite_config.php");
 <html>
 
 <head>
-  <title>PapI 2016</title>
+  <title>PapI 2017</title>
   <link href="../style/tester.css" rel="stylesheet">
 </head>
 
@@ -31,7 +31,7 @@ $result = $fgmembersite->GetCategories();
 
 if ($result != false)
 {
-  while ($row = mysql_fetch_assoc($result))
+  while ($row = mysqli_fetch_assoc($result))
   {
     echo "<option value='" . $row['category_name'] . "'>" . $row['category_name'] . "</option>";
   }
@@ -53,14 +53,14 @@ $result = $fgmembersite->GetListItems();
 $deleteButt1 = '<td><button onclick="delListItem(';
 $deleteButt2 = ');"><img src="../assets/trash-icon.png" width="20" height="20" border="0"/></button></td>';
 
-if (($result != false) && (mysql_num_rows($result) > 0))
+if (($result != false) && (mysqli_num_rows($result) > 0))
 {
   echo "<table id='itemTable' class='dataTable' style='width: 80%'><tr>";
   echo "<td class='delete'/>";
   echo "<td><b>Item</b></td>";
   echo "<td><b>Category</b></td>";
   echo "<td><b>Quantity</b></td></tr>";
-  while ($row = mysql_fetch_assoc($result))
+  while ($row = mysqli_fetch_assoc($result))
   {
     if (($temp != $row["category"]) || (!isset($temp)))
     {
